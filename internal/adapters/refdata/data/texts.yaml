@@ -1,0 +1,78 @@
+descriptions:
+  tech: ["Designed for everyday performance with a long-lasting battery.", "Includes a 2-year manufacturer warranty.", "Fast USB-C charging gets you going in minutes.", "Sleek aluminium design that fits every setup.", "Seamless pairing with your phone, tablet and laptop.", "Firmware updates add new features over time.", "Energy-efficient components keep noise and heat low.", "Compact, lightweight and built to last."]
+  appliance: ["Energy-efficient operation saves money on every use.", "Easy-clean surfaces and dishwasher-safe parts.", "Quiet motor for use at any time of day.", "Intuitive controls with multiple programmes.", "Comes with a 2-year warranty and free spare parts for 10 years.", "Compact footprint, powerful results.", "Auto shut-off for extra safety."]
+  fashion: ["Made from soft, breathable fabric for all-day comfort.", "Machine washable at 30°C.", "A timeless piece that works for every occasion.", "Responsibly sourced materials.", "The model is 1.78 m and wears size M.", "Relaxed cut with a flattering drape.", "Pair it with your favourite denim for an easy everyday look."]
+  shoes: ["Cushioned insole for all-day comfort.", "Durable rubber outsole with excellent grip.", "True to size - if between sizes, choose the larger one.", "Breathable lining keeps feet fresh.", "Lightweight construction for effortless steps."]
+  home: ["Scandinavian-inspired design that brings calm to any room.", "Crafted from durable, easy-care materials.", "Easy to assemble with the included instructions.", "Designed to be used and loved for years.", "Neutral tones that blend with any interior."]
+  furniture: ["Solid construction with a load capacity tested beyond EU standards.", "Delivered flat-packed with all fittings included.", "FSC-certified wood from responsibly managed forests.", "Removable covers are machine washable.", "Two-person assembly recommended."]
+  beauty: ["Dermatologically tested and suitable for sensitive skin.", "Vegan formula, never tested on animals.", "Lightweight texture that absorbs quickly.", "Free from parabens and silicones.", "Visible results in just 4 weeks.", "Recyclable packaging."]
+  grocery: ["Carefully selected ingredients for authentic taste.", "Store in a cool, dry place.", "Sustainably sourced.", "No artificial colours or preservatives.", "A pantry favourite loved by families across Europe."]
+  generic: ["Built to last with high-quality materials.", "Great value for everyday use.", "Compact and easy to store.", "Backed by our 30-day return promise.", "Thoughtfully designed for real life."]
+  toy: ["Encourages creativity and imaginative play.", "Tested to EU toy safety standard EN 71.", "Recommended for ages 3+.", "Makes a perfect birthday or holiday gift.", "Batteries not included."]
+  tool: ["Brushless motor for more power and longer runtime.", "Compatible with the full battery platform.", "Ergonomic soft grip reduces fatigue.", "Supplied in a sturdy carry case.", "LED work light illuminates dark spaces."]
+  book: ["A gripping story you won't be able to put down.", "An international bestseller, now in paperback.", "Winner of multiple literary awards.", "Perfect for your next book club.", "A heartfelt and unforgettable read."]
+  jewellery: ["Hypoallergenic and nickel-free.", "Arrives in a beautiful gift box.", "Handcrafted with meticulous attention to detail.", "Tarnish-resistant finish.", "A timeless gift for someone special."]
+  sport: ["Engineered for performance and comfort.", "Moisture-wicking fabric keeps you dry.", "Tested by athletes in real conditions.", "Durable construction for intensive use.", "Lightweight and packable."]
+  auto: ["EU-labelled for fuel efficiency and wet grip.", "Easy installation, fits most vehicles.", "Meets OEM quality specifications.", "Weather-resistant and durable.", "Tested for European road conditions."]
+
+review_titles:
+  5: ["Excellent!", "Love it", "Exactly as described", "Highly recommend", "Perfect", "Great value for money", "Five stars", "Better than expected", "Super happy", "Brilliant purchase"]
+  4: ["Very good", "Good product", "Happy overall", "Solid choice", "Nice, with small flaws", "Does the job", "Pretty good"]
+  3: ["It's okay", "Average", "Mixed feelings", "Not bad, not great", "Decent for the price", "As expected, nothing more"]
+  2: ["Disappointed", "Not great", "Expected more", "Mediocre quality", "Wouldn't buy again", "Meh"]
+  1: ["Terrible", "Do not buy", "Waste of money", "Broke after a week", "Very poor", "Complete disappointment", "Avoid"]
+review_bodies:
+  5: ["Really happy with this purchase.", "Arrived quickly and works perfectly.", "Great quality for the price.", "Would definitely buy again.", "Exceeded my expectations in every way.", "Bought it as a gift and they loved it.", "Excellent quality, well packaged.", "Exactly what I was looking for."]
+  4: ["Does the job well, only minor issues.", "Good quality overall, packaging could be better.", "Very satisfied, just a bit pricey.", "Works as advertised. Took a while to arrive.", "Nice product, instructions could be clearer."]
+  3: ["It's fine for the price.", "Not as good as I hoped, but usable.", "Average quality, nothing special.", "Some things are good, others not so much.", "Okay, but I've seen better."]
+  2: ["Quality is lower than expected.", "Not really worth the money.", "Had several problems from day one.", "Looks cheap in person.", "Customer service was slow to respond."]
+  1: ["Stopped working after a few days.", "Arrived damaged and the return was a hassle.", "Nothing like the pictures.", "Absolutely terrible quality.", "Complete waste of money, returning it.", "Poor quality, fell apart immediately."]
+review_style:
+  tech: {pos: ["Battery life is impressive.", "Setup took two minutes.", "Sound quality is amazing for the price.", "Screen is bright and sharp.", "Connects instantly every time."], neg: ["Battery drains way too fast.", "Overheats constantly.", "Bluetooth keeps disconnecting.", "The app is buggy.", "Stopped charging after a month."]}
+  fashion: {pos: ["Fits true to size.", "The fabric feels lovely.", "Colour is exactly as pictured.", "Very flattering cut.", "Washes well, no shrinking."], neg: ["Runs small, had to return.", "Colour looks different from the photos.", "Fabric is thin and see-through.", "Shrunk after the first wash.", "Seams came apart quickly."]}
+  shoes: {pos: ["Super comfortable from day one.", "True to size and great support.", "Looks even better in person."], neg: ["Size runs large.", "Gave me blisters.", "Sole came off after two weeks."]}
+  appliance: {pos: ["Very quiet and efficient.", "Easy to clean.", "Makes my mornings so much easier."], neg: ["Very loud.", "Leaks water.", "Hard to clean and flimsy parts."]}
+  home: {pos: ["Looks beautiful in our living room.", "Easy to assemble.", "Sturdy and well made."], neg: ["Assembly instructions were a nightmare.", "Parts were missing.", "Wobbly and cheap materials."]}
+  furniture: {pos: ["Solid and very comfortable.", "Assembly took under an hour.", "Looks premium."], neg: ["Arrived with scratches.", "Screws didn't fit.", "Much smaller than expected."]}
+  beauty: {pos: ["My skin feels so soft.", "Smells amazing.", "Lasts all day."], neg: ["Broke me out.", "Smell is too strong.", "Didn't notice any difference."]}
+  grocery: {pos: ["Tastes great!", "Fresh and well packaged.", "My family loves it."], neg: ["Close to expiry date.", "Taste is bland.", "Packaging was damaged."]}
+  toy: {pos: ["My kids play with it every day.", "Great quality, safe materials.", "Hours of fun."], neg: ["Broke within a day.", "Pieces missing.", "Too small for the price."]}
+  book: {pos: ["Couldn't put it down.", "Beautifully written.", "One of the best books I've read this year."], neg: ["Slow and predictable.", "The ending was disappointing.", "Poor print quality."]}
+  generic: {pos: ["Does exactly what it should.", "Good quality.", "Very practical."], neg: ["Feels cheap.", "Broke quickly.", "Not as described."]}
+review_local:
+  de: {pos: ["Sehr gut, gerne wieder!", "Top Qualität, schnelle Lieferung.", "Absolut empfehlenswert.", "Preis-Leistung stimmt."], neu: ["Ganz okay für den Preis.", "Erfüllt seinen Zweck."], neg: ["Leider enttäuscht.", "Qualität lässt zu wünschen übrig.", "Nach einer Woche kaputt."]}
+  fr: {pos: ["Très bon produit, je recommande !", "Livraison rapide, parfait.", "Excellent rapport qualité-prix."], neu: ["Correct sans plus.", "Conforme à la description."], neg: ["Très déçu.", "Qualité médiocre.", "Ne fonctionne plus après quelques jours."]}
+  nl: {pos: ["Super product, snel geleverd!", "Top kwaliteit, aanrader.", "Heel tevreden."], neu: ["Prima voor de prijs.", "Doet wat het moet doen."], neg: ["Erg teleurgesteld.", "Slechte kwaliteit.", "Na een week kapot."]}
+  it: {pos: ["Ottimo prodotto, consigliato!", "Spedizione veloce, tutto perfetto.", "Qualità eccellente."], neu: ["Nella media.", "Va bene per il prezzo."], neg: ["Molto deluso.", "Qualità scadente.", "Si è rotto subito."]}
+  es: {pos: ["Muy buena calidad, lo recomiendo.", "Llegó rápido y perfecto.", "Encantada con la compra."], neu: ["Está bien por el precio.", "Normalito."], neg: ["Muy decepcionado.", "Mala calidad.", "Se rompió a los pocos días."]}
+  pt: {pos: ["Excelente produto, recomendo!", "Chegou rápido e bem embalado."], neu: ["Razoável pelo preço."], neg: ["Muito fraco.", "Não recomendo."]}
+  pl: {pos: ["Bardzo dobry produkt, polecam!", "Szybka dostawa, wszystko super.", "Świetna jakość."], neu: ["W porządku za tę cenę.", "Może być."], neg: ["Jestem rozczarowany.", "Słaba jakość.", "Zepsuło się po tygodniu."]}
+  cs: {pos: ["Výborný produkt, doporučuji!", "Rychlé doručení, spokojenost."], neu: ["Za tu cenu ujde."], neg: ["Zklamání.", "Nekvalitní."]}
+  sv: {pos: ["Mycket nöjd, rekommenderas!", "Snabb leverans, toppenkvalitet."], neu: ["Helt okej för priset."], neg: ["Besviken.", "Dålig kvalitet."]}
+  da: {pos: ["Rigtig god kvalitet, kan anbefales!", "Hurtig levering."], neu: ["Fin til prisen."], neg: ["Skuffet.", "Dårlig kvalitet."]}
+  fi: {pos: ["Erittäin hyvä tuote, suosittelen!", "Nopea toimitus."], neu: ["Ihan ok hintaansa nähden."], neg: ["Pettymys.", "Huono laatu."]}
+  ro: {pos: ["Produs excelent, recomand!", "Livrare rapidă, sunt foarte mulțumită.", "Calitate foarte bună."], neu: ["Este ok pentru prețul ăsta.", "Corespunde descrierii."], neg: ["Dezamăgitor.", "Calitate slabă.", "S-a stricat după o săptămână."]}
+  ru: {pos: ["Отличный товар, рекомендую!", "Быстрая доставка, всё отлично."], neu: ["Нормально за свои деньги."], neg: ["Разочарован.", "Плохое качество."]}
+review_late: ["Delivery took much longer than promised.", "Arrived a week late.", "Tracking wasn't updated for days.", "Courier left it at the wrong address first."]
+
+seller_words: [Tech, Home, Style, Trend, Smart, Green, Blue, Nord, Euro, Prime, Star, Top, Mega, Happy, Urban, Casa, Mode, Sport, Kids, Pet, Garden, Deal, Gadget, Nova, Alpen, Sol, Luna, Bella, Viva, Eco, Vital, Fresh, Pure, Direct, Best, Fox, Bear, Wolf, Oak, River]
+seller_words2: [Haus, Shop, Store, World, Trade, Handel, Market, Outlet, Box, Point, Zone, Center, Direct, Line, Lab, Hub, Depot, Welt, Factory, Corner, Express, Plus, Online, Supply]
+seller_cn_words: [Heng, Da, Xin, Yuan, Feng, Long, Sheng, Jia, Hua, Tai, Rui, Kang, Mei, Jin, Bao, Tong, Hong, Wei, Lian, Chang]
+legal_forms:
+  DE: [GmbH, GmbH, UG (haftungsbeschränkt), e.K., GmbH & Co. KG]
+  AT: [GmbH, e.U., OG]
+  NL: [B.V., B.V., V.O.F.]
+  BE: [BV, SRL, NV]
+  FR: [SARL, SAS, SAS, EURL]
+  IT: [S.r.l., S.r.l., S.p.A., S.n.c.]
+  ES: [S.L., S.L., S.A.]
+  PT: [Lda., Unipessoal Lda.]
+  IE: [Ltd, Ltd, DAC]
+  PL: [Sp. z o.o., Sp. z o.o., S.A., s.c.]
+  CZ: [s.r.o., s.r.o., a.s.]
+  SE: [AB, AB, HB]
+  DK: [ApS, A/S]
+  FI: [Oy, Oy, Ab]
+  MD: [SRL, SRL, ÎI]
+  CN: [Co., Ltd., Trading Co., Ltd., Technology Co., Ltd., E-Commerce Co., Ltd.]
+influencers: [ANNA, LUCA, MARIE, JONAS, SOFIA, EMMA, LEON, CLARA, HUGO, JULIA, NIKO, LENA, MAX, IRINA, PAOLA, KASIA, TIM, ELENA, NOAH, ZOE]

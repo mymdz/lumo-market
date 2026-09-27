@@ -1,0 +1,53 @@
+name: lumo-market
+
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: lumo
+      POSTGRES_PASSWORD: lumo
+      POSTGRES_DB: lumo
+    command:
+      - postgres
+      - -c
+      - wal_level=logical          # ready for Debezium / logical replication
+      - -c
+      - max_replication_slots=10
+      - -c
+      - max_wal_senders=10
+      - -c
+      - shared_buffers=768MB
+      - -c
+      - maintenance_work_mem=256MB
+      - -c
+      - max_wal_size=8GB
+      - -c
+      - checkpoint_timeout=15min
+      - -c
+      - track_commit_timestamp=on
+    ports:
+      - "${LUMO_PG_PORT:-5433}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lumo -d lumo"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  simulator:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      LUMO_DATABASE_URL: postgres://lumo:lumo@postgres:5432/lumo?sslmode=disable
+      GOMEMLIMIT: 3GiB   # makes the Go GC work harder before the container runs out of memory
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+    ports:
+      - "${LUMO_API_PORT:-8088}:8080"
+    restart: unless-stopped
+
+volumes:
+  pgdata:

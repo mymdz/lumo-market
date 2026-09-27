@@ -1,0 +1,71 @@
+-- Created once after the initial backfill. Foreign keys are NOT VALID so
+-- that finalization stays fast; they are enforced for every new row.
+-- Note: orders.cart_id and reviews.customer_id have no FK on purpose
+-- (carts are purged after 30 days, reviews survive GDPR erasure).
+
+ALTER TABLE shop.categories ADD CONSTRAINT categories_parent_fk FOREIGN KEY (parent_id) REFERENCES shop.categories(id) NOT VALID;
+ALTER TABLE shop.products ADD CONSTRAINT products_category_fk FOREIGN KEY (category_id) REFERENCES shop.categories(id) NOT VALID;
+ALTER TABLE shop.products ADD CONSTRAINT products_brand_fk FOREIGN KEY (brand_id) REFERENCES shop.brands(id) NOT VALID;
+ALTER TABLE shop.product_variants ADD CONSTRAINT variants_product_fk FOREIGN KEY (product_id) REFERENCES shop.products(id) NOT VALID;
+ALTER TABLE shop.offers ADD CONSTRAINT offers_variant_fk FOREIGN KEY (variant_id) REFERENCES shop.product_variants(id) NOT VALID;
+ALTER TABLE shop.offers ADD CONSTRAINT offers_seller_fk FOREIGN KEY (seller_id) REFERENCES shop.sellers(id) NOT VALID;
+ALTER TABLE shop.price_history ADD CONSTRAINT price_history_offer_fk FOREIGN KEY (offer_id) REFERENCES shop.offers(id) NOT VALID;
+ALTER TABLE shop.stock_levels ADD CONSTRAINT stock_levels_offer_fk FOREIGN KEY (offer_id) REFERENCES shop.offers(id) NOT VALID;
+ALTER TABLE shop.stock_levels ADD CONSTRAINT stock_levels_warehouse_fk FOREIGN KEY (warehouse_id) REFERENCES shop.warehouses(id) NOT VALID;
+ALTER TABLE shop.stock_movements ADD CONSTRAINT stock_movements_offer_fk FOREIGN KEY (offer_id) REFERENCES shop.offers(id) NOT VALID;
+ALTER TABLE shop.purchase_orders ADD CONSTRAINT purchase_orders_seller_fk FOREIGN KEY (seller_id) REFERENCES shop.sellers(id) NOT VALID;
+ALTER TABLE shop.purchase_orders ADD CONSTRAINT purchase_orders_supplier_fk FOREIGN KEY (supplier_id) REFERENCES shop.suppliers(id) NOT VALID;
+ALTER TABLE shop.purchase_order_items ADD CONSTRAINT po_items_po_fk FOREIGN KEY (purchase_order_id) REFERENCES shop.purchase_orders(id) NOT VALID;
+ALTER TABLE shop.purchase_order_items ADD CONSTRAINT po_items_offer_fk FOREIGN KEY (offer_id) REFERENCES shop.offers(id) NOT VALID;
+ALTER TABLE shop.customers ADD CONSTRAINT customers_address_fk FOREIGN KEY (default_address_id) REFERENCES shop.addresses(id) DEFERRABLE INITIALLY DEFERRED NOT VALID;
+ALTER TABLE shop.addresses ADD CONSTRAINT addresses_customer_fk FOREIGN KEY (customer_id) REFERENCES shop.customers(id) DEFERRABLE INITIALLY DEFERRED NOT VALID;
+ALTER TABLE shop.coupons ADD CONSTRAINT coupons_campaign_fk FOREIGN KEY (campaign_id) REFERENCES shop.campaigns(id) NOT VALID;
+ALTER TABLE shop.carts ADD CONSTRAINT carts_customer_fk FOREIGN KEY (customer_id) REFERENCES shop.customers(id) NOT VALID;
+ALTER TABLE shop.cart_items ADD CONSTRAINT cart_items_cart_fk FOREIGN KEY (cart_id) REFERENCES shop.carts(id) ON DELETE CASCADE NOT VALID;
+ALTER TABLE shop.cart_items ADD CONSTRAINT cart_items_offer_fk FOREIGN KEY (offer_id) REFERENCES shop.offers(id) NOT VALID;
+ALTER TABLE shop.orders ADD CONSTRAINT orders_customer_fk FOREIGN KEY (customer_id) REFERENCES shop.customers(id) NOT VALID;
+ALTER TABLE shop.orders ADD CONSTRAINT orders_coupon_fk FOREIGN KEY (coupon_id) REFERENCES shop.coupons(id) NOT VALID;
+ALTER TABLE shop.orders ADD CONSTRAINT orders_ship_address_fk FOREIGN KEY (shipping_address_id) REFERENCES shop.addresses(id) NOT VALID;
+ALTER TABLE shop.order_items ADD CONSTRAINT order_items_order_fk FOREIGN KEY (order_id) REFERENCES shop.orders(id) NOT VALID;
+ALTER TABLE shop.order_items ADD CONSTRAINT order_items_offer_fk FOREIGN KEY (offer_id) REFERENCES shop.offers(id) NOT VALID;
+ALTER TABLE shop.order_items ADD CONSTRAINT order_items_seller_fk FOREIGN KEY (seller_id) REFERENCES shop.sellers(id) NOT VALID;
+ALTER TABLE shop.order_status_history ADD CONSTRAINT history_order_fk FOREIGN KEY (order_id) REFERENCES shop.orders(id) NOT VALID;
+ALTER TABLE shop.payments ADD CONSTRAINT payments_order_fk FOREIGN KEY (order_id) REFERENCES shop.orders(id) NOT VALID;
+ALTER TABLE shop.refunds ADD CONSTRAINT refunds_payment_fk FOREIGN KEY (payment_id) REFERENCES shop.payments(id) NOT VALID;
+ALTER TABLE shop.refunds ADD CONSTRAINT refunds_order_fk FOREIGN KEY (order_id) REFERENCES shop.orders(id) NOT VALID;
+ALTER TABLE shop.refunds ADD CONSTRAINT refunds_return_fk FOREIGN KEY (return_id) REFERENCES shop.returns(id) NOT VALID;
+ALTER TABLE shop.shipments ADD CONSTRAINT shipments_order_fk FOREIGN KEY (order_id) REFERENCES shop.orders(id) NOT VALID;
+ALTER TABLE shop.shipments ADD CONSTRAINT shipments_seller_fk FOREIGN KEY (seller_id) REFERENCES shop.sellers(id) NOT VALID;
+ALTER TABLE shop.returns ADD CONSTRAINT returns_order_fk FOREIGN KEY (order_id) REFERENCES shop.orders(id) NOT VALID;
+ALTER TABLE shop.returns ADD CONSTRAINT returns_item_fk FOREIGN KEY (order_item_id) REFERENCES shop.order_items(id) NOT VALID;
+ALTER TABLE shop.reviews ADD CONSTRAINT reviews_product_fk FOREIGN KEY (product_id) REFERENCES shop.products(id) NOT VALID;
+
+CREATE INDEX IF NOT EXISTS products_category_idx ON shop.products(category_id);
+CREATE INDEX IF NOT EXISTS products_updated_idx ON shop.products(updated_at);
+CREATE INDEX IF NOT EXISTS variants_product_idx ON shop.product_variants(product_id);
+CREATE INDEX IF NOT EXISTS offers_variant_idx ON shop.offers(variant_id);
+CREATE INDEX IF NOT EXISTS offers_seller_idx ON shop.offers(seller_id);
+CREATE INDEX IF NOT EXISTS offers_updated_idx ON shop.offers(updated_at);
+CREATE INDEX IF NOT EXISTS price_history_offer_idx ON shop.price_history(offer_id, changed_at);
+CREATE INDEX IF NOT EXISTS stock_movements_created_idx ON shop.stock_movements(created_at);
+CREATE INDEX IF NOT EXISTS customers_email_idx ON shop.customers(lower(email));
+CREATE INDEX IF NOT EXISTS customers_updated_idx ON shop.customers(updated_at);
+CREATE INDEX IF NOT EXISTS addresses_customer_idx ON shop.addresses(customer_id);
+CREATE INDEX IF NOT EXISTS carts_updated_idx ON shop.carts(updated_at);
+CREATE INDEX IF NOT EXISTS carts_customer_idx ON shop.carts(customer_id);
+CREATE INDEX IF NOT EXISTS cart_items_cart_idx ON shop.cart_items(cart_id);
+CREATE INDEX IF NOT EXISTS orders_customer_idx ON shop.orders(customer_id);
+CREATE INDEX IF NOT EXISTS orders_placed_idx ON shop.orders(placed_at);
+CREATE INDEX IF NOT EXISTS orders_updated_idx ON shop.orders(updated_at);
+CREATE INDEX IF NOT EXISTS order_items_order_idx ON shop.order_items(order_id);
+CREATE INDEX IF NOT EXISTS order_items_product_idx ON shop.order_items(product_id);
+CREATE INDEX IF NOT EXISTS history_order_idx ON shop.order_status_history(order_id);
+CREATE INDEX IF NOT EXISTS history_changed_idx ON shop.order_status_history(changed_at);
+CREATE INDEX IF NOT EXISTS payments_order_idx ON shop.payments(order_id);
+CREATE INDEX IF NOT EXISTS payments_updated_idx ON shop.payments(updated_at);
+CREATE INDEX IF NOT EXISTS refunds_order_idx ON shop.refunds(order_id);
+CREATE INDEX IF NOT EXISTS shipments_order_idx ON shop.shipments(order_id);
+CREATE INDEX IF NOT EXISTS shipments_updated_idx ON shop.shipments(updated_at);
+CREATE INDEX IF NOT EXISTS returns_order_idx ON shop.returns(order_id);
+CREATE INDEX IF NOT EXISTS reviews_product_idx ON shop.reviews(product_id);
+CREATE INDEX IF NOT EXISTS reviews_created_idx ON shop.reviews(created_at);

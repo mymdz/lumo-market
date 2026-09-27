@@ -1,0 +1,38 @@
+# Every setting can be overridden with an env var LUMO_<NAME>,
+# e.g. LUMO_HISTORY_DAYS=90.
+
+database_url: postgres://lumo:lumo@localhost:5433/lumo?sslmode=disable
+http_addr: ":8080"
+
+# Changing the seed gives a different (but reproducible) world.
+seed: 42
+
+# How much history to generate before switching to real time.
+history_days: 730
+
+# Baseline orders per day (seasonality, campaigns and noise come on top:
+# Black Friday easily doubles it).
+orders_per_day_start: 5000   # at the start of the history
+orders_per_day_now: 13000    # at the moment of the first launch
+growth_per_year_after_now: 0.25
+
+initial_products: 20000
+initial_sellers: 250
+
+# 0 = clean data, 1 = lots of real-world mess (duplicates, format noise,
+# late-arriving rows, updated_at not maintained during "bug" windows...).
+dirt_level: 0.5
+
+# Simulated seconds per wall second in live mode (change at runtime via the API).
+# Below 1 the simulation lags behind; above 1 requires allow_future.
+speed: 1
+# Allow simulated time to run ahead of wall time (speed > 1). Off by default so
+# that nothing is ever dated in the future.
+allow_future: false
+
+# Commit interval in live mode.
+live_flush: 1s
+# Simulated interval between commits during the backfill.
+backfill_checkpoint: 24h
+
+log_level: info

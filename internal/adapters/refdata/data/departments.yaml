@@ -1,0 +1,792 @@
+# Category tree: department > category > leaf.
+# Properties are inherited down the tree and can be overridden at any level:
+#   noun, price [min,max] EUR incl. VAT, axes, tpl, pools, w (demand weight),
+#   season, tags, ret (return rate), own (1P share), repeat (repurchase days),
+#   qty (max qty per line), rel (related leaves), style, brands, vat, life,
+#   dens (catalog density), kg (weight)
+# Department `w` is its share of overall demand.
+
+departments:
+  - name: Electronics
+    w: 12
+    style: tech
+    brands: tech
+    ret: 0.05
+    own: 0.5
+    life: tech
+    dens: 0.8
+    kg: 0.8
+    tags: [gift, blackfriday]
+    children:
+      - name: Phones & Wearables
+        children:
+          - {name: Smartphones, noun: Smartphone, price: [119, 1399], axes: [storage_phone, color_tech], w: 9, kg: 0.2, rel: [Phone Cases, Screen Protectors, Chargers & Cables, Wireless Earbuds, Power Banks]}
+          - {name: Phone Cases, noun: Case, price: [7, 59], axes: [phone_fit, color_basic], w: 6, style: generic, life: consumer, ret: 0.08, kg: 0.05, tpl: ["{brand} {case_type} Case", "{brand} {case_type} Phone Case with {case_feat}"], pools: {case_type: [Clear, Silicone, Rugged, Leather Wallet, Slim, MagSafe-Compatible, Glitter, Armor, Eco], case_feat: [Card Holder, Kickstand, Lanyard, Camera Protection, Drop Protection]}}
+          - {name: Screen Protectors, noun: Screen Protector, price: [5, 29], axes: [phone_fit], w: 3, style: generic, life: consumer, kg: 0.03, tpl: ["{brand} Tempered Glass {noun} (2 Pack)", "{brand} Privacy {noun}", "{brand} Anti-Glare {noun}"]}
+          - {name: Chargers & Cables, noun: Charger, price: [6, 69], w: 5, style: generic, life: consumer, kg: 0.1, tpl: ["{brand} {watt}W USB-C Fast Charger", "{brand} USB-C to USB-C Cable, {cable_len}", "{brand} {watt}W GaN {noun}, 3 Ports", "{brand} Wireless Charging Pad {watt}W", "{brand} Braided Lightning Cable, {cable_len}"], pools: {watt: ["20", "30", "45", "65", "100", "140"], cable_len: [1 m, 2 m, 3 m, 0.5 m]}}
+          - {name: Power Banks, noun: Power Bank, price: [15, 99], w: 3, style: generic, kg: 0.3, tpl: ["{brand} {mah} mAh {noun}", "{brand} Slim {noun} {mah} mAh, USB-C PD", "{brand} Magnetic {noun} {mah} mAh"], pools: {mah: ["5000", "10000", "20000", "26800"]}, season: summer_mild}
+          - {name: Smartwatches, noun: Smartwatch, price: [49, 699], axes: [color_tech], w: 4, kg: 0.1}
+          - {name: Fitness Trackers, noun: Fitness Tracker, price: [25, 199], axes: [color_tech], w: 2, season: fitness, kg: 0.05}
+      - name: Computers & Tablets
+        children:
+          - {name: Laptops, noun: Laptop, price: [329, 2799], axes: [laptop_cfg], w: 7, kg: 1.8, ret: 0.07, tpl: ["{brand} {tech_line} {gen}{tech_suffix} {noun}, {lap_spec}", "{brand} {tech_line}Book {gen} {lap_spec}"], pools: {lap_spec: ['13.3" {cpu}', '14" {cpu}', '15.6" FHD {cpu}', '16" 2.5K {cpu}', '17.3" {cpu}'], cpu: [Intel Core i5, Intel Core i7, Intel Core Ultra 5, Intel Core Ultra 7, AMD Ryzen 5, AMD Ryzen 7, AMD Ryzen 9]}, rel: [Mice, Laptop Bags, USB Hubs & Docks, Monitors], tags: [gift, school, blackfriday]}
+          - {name: Desktop PCs, noun: Desktop PC, price: [399, 2999], w: 2, kg: 8, tpl: ["{brand} {tech_line} {noun}, {cpu}, {ram}", "{brand} {tech_line} Gaming {noun} {gpu}"], pools: {cpu: [Intel Core i5, Intel Core i7, AMD Ryzen 7], ram: [16 GB RAM, 32 GB RAM], gpu: [RTX 4060, RTX 4070, RX 7800 XT]}}
+          - {name: Monitors, noun: Monitor, price: [99, 1199], axes: [monitor_size], w: 4, kg: 5, tpl: ["{brand} {tech_line} {mon_kind} {noun}", "{brand} {model} {mon_kind} {noun}"], pools: {mon_kind: [FHD IPS, QHD 165Hz Gaming, 4K UHD, Curved Ultrawide, USB-C Office, OLED]}}
+          - {name: Tablets, noun: Tablet, price: [99, 1299], axes: [storage_tablet, color_tech], w: 4, kg: 0.5, tags: [gift, school, blackfriday]}
+          - {name: Keyboards, noun: Keyboard, price: [15, 199], w: 2, style: generic, kg: 0.7, tpl: ["{brand} {kb_kind} {noun}", "{brand} {tech_line} {kb_kind} {noun}"], pools: {kb_kind: [Wireless, Mechanical, Low-Profile, Ergonomic, RGB Gaming, Compact 75%]}}
+          - {name: Mice, noun: Mouse, price: [9, 149], w: 3, style: generic, kg: 0.15, tpl: ["{brand} {mouse_kind} {noun}", "{brand} {tech_line} {mouse_kind} {noun}"], pools: {mouse_kind: [Wireless, Ergonomic Vertical, Gaming, Silent, Bluetooth Travel]}}
+          - {name: Webcams, noun: Webcam, price: [25, 199], w: 1, kg: 0.2, tpl: ["{brand} {res} {noun}", "{brand} {tech_line} {res} Streaming {noun}"], pools: {res: [1080p, 2K, 4K]}}
+          - {name: USB Hubs & Docks, noun: USB-C Hub, price: [15, 249], w: 1.5, style: generic, kg: 0.2, tpl: ["{brand} {ports}-in-1 {noun}", "{brand} Thunderbolt Docking Station {model}"], pools: {ports: ["4", "6", "7", "8", "11"]}}
+          - {name: Laptop Bags, noun: Laptop Bag, price: [19, 149], w: 1.5, style: generic, kg: 0.8, life: consumer, tpl: ['{brand} {bag_kind} for 15.6" Laptops', '{brand} {bag_kind} 14"'], pools: {bag_kind: [Laptop Backpack, Laptop Sleeve, Messenger Bag, Rolling Laptop Case, Briefcase]}, tags: [school]}
+      - name: PC Components
+        own: 0.4
+        children:
+          - {name: Graphics Cards, noun: Graphics Card, price: [199, 1999], w: 3, kg: 1.2, tpl: ["{brand} {gpu} {vram} {gpu_ed}"], pools: {gpu: [GeForce RTX 4060, GeForce RTX 4060 Ti, GeForce RTX 4070 Super, GeForce RTX 4080 Super, Radeon RX 7700 XT, Radeon RX 7800 XT, Radeon RX 7900 XTX], vram: [8 GB, 12 GB, 16 GB, 24 GB], gpu_ed: [OC Edition, Gaming X, Twin Fan, Triple Fan, Eagle, Aero]}}
+          - {name: Processors, noun: Processor, price: [99, 699], w: 2, kg: 0.1, tpl: ["{cpu_model}, {cores}-Core, Boxed"], pools: {cpu_model: [Intel Core i5-14600K, Intel Core i7-14700K, Intel Core i9-14900K, AMD Ryzen 5 7600X, AMD Ryzen 7 7800X3D, AMD Ryzen 9 7950X, AMD Ryzen 7 9700X], cores: ["6", "8", "12", "16", "20"]}}
+          - {name: SSDs, noun: SSD, price: [35, 399], axes: [storage_ssd], w: 3, kg: 0.05, tpl: ["{brand} {tech_line} NVMe M.2 {noun} PCIe {pcie}", "{brand} 2.5\" SATA {noun}"], pools: {pcie: ["3.0", "4.0", "5.0"]}}
+          - {name: Hard Drives, noun: Hard Drive, price: [45, 349], w: 1, kg: 0.6, tpl: ["{brand} {hdd} Internal {noun} 7200 RPM", "{brand} {hdd} Portable External {noun}"], pools: {hdd: [2 TB, 4 TB, 8 TB, 12 TB]}}
+          - {name: RAM, noun: RAM, price: [39, 299], axes: [ram_kit], w: 1.5, kg: 0.05, tpl: ["{brand} {tech_line} DDR5 {mhz} MHz {noun} Kit", "{brand} DDR4 {mhz4} MHz {noun}"], pools: {mhz: ["5600", "6000", "6400"], mhz4: ["3200", "3600"]}}
+          - {name: Motherboards, noun: Motherboard, price: [89, 499], w: 1, kg: 1, tpl: ["{brand} {chipset} {mb_form} {noun} Wi-Fi"], pools: {chipset: [B650, X670E, B760, Z790, B550], mb_form: [ATX, Micro-ATX, Mini-ITX]}}
+          - {name: Power Supplies, noun: Power Supply, price: [49, 299], w: 0.8, kg: 2, tpl: ["{brand} {psu}W 80+ {rating} Modular {noun}"], pools: {psu: ["650", "750", "850", "1000"], rating: [Bronze, Gold, Platinum]}}
+          - {name: PC Cases, noun: PC Case, price: [49, 249], axes: [color_basic], w: 0.8, kg: 7, tpl: ["{brand} {tech_line} {case_f} {noun} with Tempered Glass"], pools: {case_f: [Mid-Tower, Full-Tower, Mini-ITX, Airflow Mid-Tower]}}
+      - name: Audio
+        children:
+          - {name: Headphones, noun: Headphones, price: [19, 449], axes: [color_tech], w: 4, kg: 0.3, tpl: ["{brand} {tech_line} {gen} {hp_kind} {noun}", "{brand} {tech_line}{tech_suffix} {hp_kind} {noun}"], pools: {hp_kind: [Wireless Noise Cancelling, Over-Ear, On-Ear Bluetooth, Studio, Kids]}}
+          - {name: Wireless Earbuds, noun: Wireless Earbuds, price: [19, 299], axes: [color_tech], w: 6, kg: 0.1, tpl: ["{brand} {tech_line} Buds {gen}{tech_suffix}", "{brand} {tech_line} {noun} with ANC", "{brand} Sport {noun}"]}
+          - {name: Bluetooth Speakers, noun: Bluetooth Speaker, price: [19, 349], axes: [color_basic], w: 3, season: summer_mild, kg: 0.8, tpl: ["{brand} {tech_line} {gen} Portable {noun}", "{brand} {tech_line} Waterproof {noun}", "{brand} Party {noun} {model}"]}
+          - {name: Soundbars, noun: Soundbar, price: [79, 999], w: 1.5, kg: 4, tpl: ["{brand} {tech_line} {ch} {noun} with Subwoofer", "{brand} {tech_line} Dolby Atmos {noun}"], pools: {ch: ["2.1", "3.1", "5.1", "7.1.4"]}}
+          - {name: Hi-Fi Systems, noun: Hi-Fi System, price: [99, 899], w: 0.6, kg: 6}
+          - {name: Microphones, noun: Microphone, price: [25, 249], w: 0.8, kg: 0.4, tpl: ["{brand} USB {noun} {model}", "{brand} Wireless Lavalier {noun}", "{brand} Podcast {noun}"]}
+          - {name: Turntables, noun: Turntable, price: [89, 699], w: 0.5, kg: 5, life: home, tags: [gift]}
+      - name: TV & Video
+        children:
+          - {name: Televisions, noun: TV, price: [229, 2999], axes: [tv_size], w: 6, kg: 15, ret: 0.06, tpl: ["{brand} {tech_line} {tv_tech} 4K Smart {noun}", "{brand} {tv_tech} {noun} {model}", "{brand} {tech_line} QLED Google {noun}"], pools: {tv_tech: [LED, QLED, OLED, Mini-LED, NanoCell]}, rel: [Soundbars, TV Mounts, Streaming Devices], tags: [gift, blackfriday, football]}
+          - {name: Projectors, noun: Projector, price: [99, 1999], w: 1, kg: 3}
+          - {name: Streaming Devices, noun: Streaming Stick, price: [29, 199], w: 1.5, kg: 0.1, tpl: ["{brand} {tech_line} 4K {noun}", "{brand} {tech_line} Media Box"]}
+          - {name: TV Mounts, noun: TV Wall Mount, price: [15, 129], w: 1, style: generic, life: consumer, kg: 3, tpl: ['{brand} Full Motion {noun} for 32-65"', '{brand} Fixed {noun} for 43-90"', '{brand} Tilting {noun}']}
+      - name: Cameras & Drones
+        children:
+          - {name: Digital Cameras, noun: Mirrorless Camera, price: [399, 3499], w: 1.5, kg: 0.8, tpl: ["{brand} {tech_line} {model} {noun} Body", "{brand} {tech_line} {model} {noun} Kit with 18-55mm Lens"]}
+          - {name: Camera Lenses, noun: Lens, price: [149, 1999], w: 1, kg: 0.6, tpl: ["{brand} {lens} {noun}"], pools: {lens: [50mm f/1.8, 35mm f/1.4, 24-70mm f/2.8, 70-200mm f/4, 16-35mm f/4, 85mm f/1.8, 100-400mm]}}
+          - {name: Action Cameras, noun: Action Camera, price: [79, 549], w: 1.2, kg: 0.2, season: summer_mild}
+          - {name: Drones, noun: Drone, price: [79, 1799], w: 1, kg: 0.9, tags: [gift]}
+          - {name: Memory Cards, noun: microSD Card, price: [7, 99], w: 1.5, style: generic, life: consumer, kg: 0.01, tpl: ["{brand} {gb} {noun} UHS-I U3", "{brand} Extreme SD Card {gb} V30"], pools: {gb: [64 GB, 128 GB, 256 GB, 512 GB, 1 TB]}}
+          - {name: Tripods, noun: Tripod, price: [15, 249], w: 0.6, style: generic, life: consumer, kg: 1.5}
+      - name: Gaming
+        tags: [gift, blackfriday]
+        children:
+          - {name: Gaming Consoles, noun: Console, price: [199, 699], w: 4, kg: 4, tpl: ["{brand} {console} {noun} {console_ed}"], pools: {console: [Playvanta X, Playvanta X Slim, Nexbox Series 2, Switchy OLED, Playvanta X Digital], console_ed: ["", Bundle, 1 TB, with 2 Controllers]}, own: 0.8, rel: [Video Games, Controllers, Gaming Headsets]}
+          - {name: Video Games, noun: Video Game, price: [19, 79], w: 5, kg: 0.1, life: book, dens: 2, tpl: ["{game_title} ({platform})"], pools: {game_title: ["{g_word} {g_word2}", "{g_word}: {g_word2} of {b_place}", "{g_word2} Legends {num}", "Super {g_word} Racing", "{g_word} Kingdoms II", "Football Manager League {year}", "{g_word2} Hunters"], g_word: [Shadow, Iron, Neon, Star, Crystal, Dragon, Cyber, Frost, Void, Titan, Crimson, Solar], g_word2: [Odyssey, Protocol, Chronicles, Frontier, Empire, Rebellion, Heist, Horizon, Requiem, Siege, Voyage, Uprising], platform: [Playvanta X, Nexbox, Switchy, PC], year: ["25", "26"]}, own: 0.7}
+          - {name: Controllers, noun: Wireless Controller, price: [29, 199], axes: [color_basic], w: 2, kg: 0.3}
+          - {name: Gaming Headsets, noun: Gaming Headset, price: [25, 299], w: 2, kg: 0.4}
+          - {name: Gaming Chairs, noun: Gaming Chair, price: [129, 499], axes: [color_basic], w: 1, kg: 20, style: generic, life: home}
+          - {name: VR Headsets, noun: VR Headset, price: [299, 1199], w: 0.6, kg: 0.6}
+      - name: Smart Home
+        children:
+          - {name: Smart Speakers, noun: Smart Speaker, price: [29, 249], axes: [color_basic], w: 2, kg: 0.5}
+          - {name: Smart Lighting, noun: Smart Bulb, price: [9, 199], w: 2, style: generic, kg: 0.2, tpl: ["{brand} Smart LED {noun} E27, RGB, {pack_n}", "{brand} Smart Light Strip {len}", "{brand} Smart Starter Kit (3 Bulbs + Bridge)"], pools: {pack_n: [1 Pack, 2 Pack, 4 Pack], len: [2 m, 5 m, 10 m]}}
+          - {name: Security Cameras, noun: Security Camera, price: [29, 349], w: 2, kg: 0.5, tpl: ["{brand} {tech_line} {res} Outdoor {noun}", "{brand} Indoor Pan/Tilt {noun} {res}", "{brand} Wireless Battery {noun}"], pools: {res: [2K, 4K, 1080p]}}
+          - {name: Video Doorbells, noun: Video Doorbell, price: [49, 249], w: 1, kg: 0.4}
+          - {name: Smart Plugs, noun: Smart Plug, price: [9, 49], w: 1.2, style: generic, kg: 0.1, tpl: ["{brand} Wi-Fi {noun} with Energy Monitor ({pack_n})"], pools: {pack_n: [1 Pack, 2 Pack, 4 Pack]}, season: heating}
+          - {name: Smart Thermostats, noun: Smart Thermostat, price: [49, 299], w: 1, season: heating, kg: 0.3}
+      - name: Networking
+        children:
+          - {name: Routers, noun: Wi-Fi Router, price: [39, 499], w: 1.5, kg: 0.8, tpl: ["{brand} {wifi} {noun} {model}"], pools: {wifi: [Wi-Fi 6, Wi-Fi 6E, Wi-Fi 7, AX3000, BE9300]}}
+          - {name: Mesh Wi-Fi Systems, noun: Mesh Wi-Fi System, price: [89, 599], w: 1, kg: 1.2, tpl: ["{brand} {tech_line} {noun} ({pack_n})"], pools: {pack_n: [2 Pack, 3 Pack]}}
+          - {name: Network Switches, noun: Network Switch, price: [19, 199], w: 0.5, kg: 0.6, tpl: ["{brand} {ports}-Port Gigabit {noun}"], pools: {ports: ["5", "8", "16", "24"]}}
+      - name: Printers & Ink
+        children:
+          - {name: Printers, noun: Printer, price: [59, 599], w: 2, kg: 7, tpl: ["{brand} {tech_line} {pr_kind} {noun} {model}"], pools: {pr_kind: [All-in-One Inkjet, Colour Laser, Mono Laser, Photo, EcoTank]}, rel: [Ink Cartridges, Office Paper], tags: [school]}
+          - {name: Ink Cartridges, noun: Ink Cartridge, price: [9, 89], w: 3, style: generic, life: evergreen, repeat: 75, qty: 3, kg: 0.1, tpl: ["{brand} {model} {noun} {ink_kind}", "{brand} {model}XL High Yield {noun}"], pools: {ink_kind: [Black, Tri-Colour, Multipack (4 Colours), Cyan, Magenta]}}
+          - {name: Toner, noun: Toner Cartridge, price: [29, 159], w: 1, style: generic, life: evergreen, repeat: 120, kg: 0.8, tpl: ["{brand} {model} {noun} Black", "{brand} {model} {noun} Colour Set"]}
+
+  - name: Home Appliances
+    w: 6
+    style: appliance
+    brands: appliance
+    ret: 0.06
+    own: 0.55
+    life: home
+    dens: 0.5
+    kg: 6
+    tags: [blackfriday]
+    children:
+      - name: Kitchen Appliances
+        children:
+          - {name: Coffee Machines, noun: Coffee Machine, price: [49, 1499], w: 5, kg: 7, tpl: ["{brand} {appl_line} {coffee_kind} {noun} {model}", "{brand} {coffee_kind} {noun}"], pools: {coffee_kind: [Bean-to-Cup, Espresso, Filter, Capsule, Portafilter]}, rel: [Coffee Beans, Coffee Capsules, Descaler], tags: [gift, blackfriday]}
+          - {name: Kettles, noun: Kettle, price: [19, 149], axes: [color_basic], w: 3, kg: 1.2, tpl: ["{brand} {kettle_kind} {noun} 1.7 l", "{brand} {appl_line} {kettle_kind} {noun}"], pools: {kettle_kind: [Electric, Temperature Control, Glass, Stainless Steel, Retro]}}
+          - {name: Toasters, noun: Toaster, price: [19, 199], axes: [color_basic], w: 2, kg: 1.5}
+          - {name: Blenders, noun: Blender, price: [25, 499], w: 2, kg: 3, tpl: ["{brand} {appl_line} High-Speed {noun}", "{brand} Personal {noun} To Go", "{brand} Hand {noun} Set"]}
+          - {name: Food Processors, noun: Food Processor, price: [49, 499], w: 1.5, kg: 4}
+          - {name: Stand Mixers, noun: Stand Mixer, price: [99, 699], axes: [color_basic], w: 1.5, kg: 8, tags: [gift]}
+          - {name: Air Fryers, noun: Air Fryer, price: [49, 299], w: 4, kg: 5, tpl: ["{brand} {appl_line} {noun} {litre} l", "{brand} Dual Zone {noun} {litre} l", "{brand} {noun} XXL with Window"], pools: {litre: ["4", "5.5", "7.6", "9"]}}
+          - {name: Microwaves, noun: Microwave, price: [69, 399], w: 1.5, kg: 12}
+          - {name: Juicers, noun: Juicer, price: [39, 399], w: 0.8, kg: 4, season: summer_mild}
+          - {name: Sandwich Makers & Grills, noun: Contact Grill, price: [25, 199], w: 1, kg: 3}
+          - {name: Descaler, noun: Descaler, price: [6, 19], w: 0.8, style: generic, life: evergreen, repeat: 90, qty: 3, kg: 0.5, tpl: ["{brand} Universal {noun} for Coffee Machines, 500 ml", "{brand} {noun} Tablets (6 pcs)"]}
+      - name: Large Appliances
+        ret: 0.03
+        kg: 60
+        children:
+          - {name: Refrigerators, noun: Fridge Freezer, price: [299, 2499], w: 3, tpl: ["{brand} {appl_line} {fridge_kind} {noun} {model}"], pools: {fridge_kind: [Side-by-Side, American-Style, Built-In, NoFrost, Retro]}, season: summer_mild}
+          - {name: Washing Machines, noun: Washing Machine, price: [299, 1399], w: 3, tpl: ["{brand} {appl_line} {kg} kg {noun} {model}"], pools: {kg: ["7", "8", "9", "10"]}}
+          - {name: Tumble Dryers, noun: Heat Pump Dryer, price: [349, 1299], w: 1.5, season: winter_mild}
+          - {name: Dishwashers, noun: Dishwasher, price: [299, 1199], w: 2}
+          - {name: Ovens, noun: Built-In Oven, price: [249, 1599], w: 1.2}
+          - {name: Cooktops, noun: Induction Hob, price: [199, 1299], w: 1}
+          - {name: Freezers, noun: Chest Freezer, price: [199, 899], w: 0.8, season: summer_mild}
+      - name: Vacuums & Cleaning
+        children:
+          - {name: Vacuum Cleaners, noun: Vacuum Cleaner, price: [69, 799], w: 4, kg: 5, tpl: ["{brand} {appl_line} Cordless Stick {noun}", "{brand} Bagless {noun} {model}", "{brand} {appl_line} Pet {noun}"], tags: [blackfriday]}
+          - {name: Robot Vacuums, noun: Robot Vacuum, price: [149, 1299], w: 3, kg: 4, tpl: ["{brand} {appl_line} {noun} with Mop", "{brand} {noun} {model} Self-Emptying"], tags: [gift, blackfriday]}
+          - {name: Steam Mops, noun: Steam Mop, price: [49, 249], w: 0.8, kg: 3}
+          - {name: Window Cleaners, noun: Window Vacuum, price: [39, 149], w: 0.5, kg: 1, season: garden}
+          - {name: Vacuum Bags & Filters, noun: Vacuum Bags, price: [6, 29], w: 1.2, style: generic, life: evergreen, repeat: 100, kg: 0.3, tpl: ["{brand} {noun} {model} (10 pcs)", "{brand} HEPA Filter {model}"]}
+      - name: Climate
+        children:
+          - {name: Fans, noun: Fan, price: [19, 399], w: 2.5, season: cooling, tags: [heat], kg: 4, tpl: ["{brand} {fan_kind} {noun}", "{brand} {appl_line} {fan_kind} {noun} {model}"], pools: {fan_kind: [Tower, Pedestal, Desk, Bladeless, Ceiling]}}
+          - {name: Air Conditioners, noun: Portable Air Conditioner, price: [229, 899], w: 1.5, season: cooling, tags: [heat], kg: 30}
+          - {name: Heaters, noun: Heater, price: [25, 299], w: 2, season: heating, tags: [cold], kg: 4, tpl: ["{brand} {heater_kind} {noun} 2000 W", "{brand} {appl_line} {heater_kind} {noun}"], pools: {heater_kind: [Oil-Filled Radiator, Ceramic Fan, Convector, Infrared Panel]}}
+          - {name: Dehumidifiers, noun: Dehumidifier, price: [99, 399], w: 1, season: autumn, kg: 12}
+          - {name: Air Purifiers, noun: Air Purifier, price: [69, 699], w: 1.2, kg: 6}
+          - {name: Humidifiers, noun: Humidifier, price: [29, 199], w: 0.8, season: heating, kg: 2}
+      - name: Personal Care Appliances
+        kg: 0.6
+        children:
+          - {name: Electric Toothbrushes, noun: Electric Toothbrush, price: [19, 299], axes: [color_basic], w: 3, rel: [Toothbrush Heads], tags: [gift]}
+          - {name: Toothbrush Heads, noun: Brush Heads, price: [9, 39], w: 2, style: generic, life: evergreen, repeat: 90, kg: 0.05, tpl: ["{brand} Precision Clean {noun} (4 pcs)", "{brand} Sensitive {noun} (8 pcs)"]}
+          - {name: Hair Dryers, noun: Hair Dryer, price: [19, 449], axes: [color_basic], w: 2.5, tags: [gift]}
+          - {name: Hair Straighteners & Stylers, noun: Hair Straightener, price: [19, 499], w: 2}
+          - {name: Shavers & Trimmers, noun: Electric Shaver, price: [29, 349], w: 2.5, tags: [gift], tpl: ["{brand} {appl_line} Wet & Dry {noun}", "{brand} Beard Trimmer {model}", "{brand} {appl_line} Multigroom Kit"]}
+          - {name: Epilators, noun: Epilator, price: [39, 199], w: 0.8, season: summer_mild}
+      - name: Irons & Sewing
+        children:
+          - {name: Steam Irons, noun: Steam Iron, price: [19, 199], w: 1.5, kg: 1.5}
+          - {name: Garment Steamers, noun: Garment Steamer, price: [29, 149], w: 1, kg: 1.5}
+          - {name: Sewing Machines, noun: Sewing Machine, price: [99, 899], w: 0.6, kg: 7}
+
+  - name: Women's Fashion
+    w: 11
+    style: fashion
+    brands: fashion
+    ret: 0.30
+    own: 0.25
+    life: fashion
+    dens: 2.2
+    kg: 0.4
+    axes: [size_apparel, color_fashion]
+    children:
+      - name: Women's Clothing
+        children:
+          - {name: Dresses, noun: Dress, price: [19, 249], w: 6, ret: 0.38, season: summer_mild, pools: {fit: [Midi, Maxi, Mini, Wrap, Shirt, Slip, A-Line, Bodycon, Smock, Tiered]}, tpl: ["{brand} {fit} {material} {noun}", "{brand} {collection_f} {fit} {noun}"]}
+          - {name: Tops & T-Shirts, noun: T-Shirt, price: [7, 69], w: 6, tpl: ["{brand} {fit} {material} {noun}", "{brand} {fit} Tank Top", "{brand} Long-Sleeve {material} Top"]}
+          - {name: Blouses & Shirts, noun: Blouse, price: [15, 129], w: 3}
+          - {name: Women's Jeans, noun: Jeans, price: [25, 179], axes: [size_jeans_w, color_fashion], w: 4, ret: 0.35, pools: {fit: [Skinny, Straight, Mom, Wide-Leg, Bootcut, Flared, Slim, Barrel, High-Rise]}, tpl: ["{brand} {fit} {noun}", "{brand} {fit} Stretch {noun}"]}
+          - {name: Trousers, noun: Trousers, price: [19, 149], axes: [size_women, color_fashion], w: 2.5}
+          - {name: Skirts, noun: Skirt, price: [15, 129], w: 2, season: summer_mild, pools: {fit: [Midi, Mini, Pleated, Satin Slip, Denim, A-Line]}}
+          - {name: Knitwear, noun: Jumper, price: [19, 199], w: 3, season: winter_mild, pools: {material: [Merino, Cashmere-Blend, Cotton, Wool-Blend, Alpaca-Blend, Chunky Knit]}}
+          - {name: Women's Jackets, noun: Jacket, price: [39, 299], w: 2.5, season: autumn, pools: {fit: [Denim, Leather, Bomber, Quilted, Utility, Biker, Blazer]}, tpl: ["{brand} {fit} {noun}"]}
+          - {name: Women's Coats, noun: Coat, price: [59, 449], w: 2.5, season: winter, tags: [cold], pools: {fit: [Wool, Puffer, Trench, Teddy, Longline, Parka, Down]}, tpl: ["{brand} {fit} {noun}", "{brand} {collection_f} {fit} {noun}"]}
+          - {name: Swimwear, noun: Bikini Set, price: [15, 119], w: 2.5, season: summer, tags: [heat], ret: 0.25, tpl: ["{brand} {collection_f} {noun}", "{brand} Ribbed Swimsuit", "{brand} High-Waist {noun}"]}
+          - {name: Lingerie, noun: Bra, price: [12, 89], axes: [size_bra, color_fashion], w: 2.5, brands: lingerie, tags: [valentine], ret: 0.15, tpl: ["{brand} {bra_kind} {noun}", "{brand} Lace Bralette", "{brand} Seamless Briefs (3 Pack)"], pools: {bra_kind: [Push-Up, Balconette, Non-Wired, Lace, T-Shirt, Sports]}}
+          - {name: Sleepwear, noun: Pyjama Set, price: [15, 99], w: 1.5, brands: lingerie, season: winter_mild, tags: [gift]}
+          - {name: Women's Activewear, noun: Leggings, price: [15, 99], w: 3, season: fitness, brands: sportwear, tpl: ["{brand} High-Waist Sculpt {noun}", "{brand} Seamless Sports Bra", "{brand} {fit} Training Top", "{brand} 7/8 Yoga {noun}"]}
+      - name: Women's Shoes
+        style: shoes
+        axes: [shoe_w, color_fashion]
+        ret: 0.26
+        kg: 0.9
+        children:
+          - {name: Women's Sneakers, noun: Sneakers, price: [29, 199], w: 5, brands: shoes}
+          - {name: Women's Boots, noun: Boots, price: [49, 299], w: 3, season: winter, tags: [cold], brands: shoes, tpl: ["{brand} {shoe_mat} {boot_kind}", "{brand} {shoe_line} {boot_kind}"], pools: {boot_kind: [Knee-High Boots, Chelsea Boots, Ankle Boots, Combat Boots, Snow Boots, Cowboy Boots]}}
+          - {name: Sandals, noun: Sandals, price: [19, 149], w: 3, season: summer, tags: [heat], brands: shoes}
+          - {name: Heels & Pumps, noun: Pumps, price: [29, 249], w: 1.5, brands: shoes, tpl: ["{brand} {shoe_mat} Block Heel {noun}", "{brand} Slingback {noun}", "{brand} Stiletto {noun}"]}
+          - {name: Ballet Flats & Loafers, noun: Loafers, price: [29, 179], w: 1.5, brands: shoes}
+          - {name: Slippers, noun: Slippers, price: [9, 59], w: 1.2, season: winter, tags: [gift], brands: shoes}
+      - name: Women's Accessories
+        axes: [color_fashion]
+        ret: 0.12
+        children:
+          - {name: Handbags, noun: Handbag, price: [19, 599], w: 3, brands: bags, tags: [gift], tpl: ["{brand} {bag_style} {noun}", "{brand} {shoe_mat} {bag_style} Bag"], pools: {bag_style: [Crossbody, Tote, Shoulder, Bucket, Clutch, Hobo, Saddle, Mini]}}
+          - {name: Women's Backpacks, noun: Backpack, price: [19, 199], w: 1.2, brands: bags, tags: [school]}
+          - {name: Women's Wallets, noun: Wallet, price: [12, 199], w: 1, brands: bags, tags: [gift]}
+          - {name: Scarves, noun: Scarf, price: [9, 149], w: 1.5, season: winter, tags: [cold, gift], pools: {material: [Wool, Cashmere-Blend, Silk, Chunky Knit, Modal]}}
+          - {name: Women's Hats & Caps, noun: Hat, price: [9, 79], w: 1, season: winter_mild}
+          - {name: Women's Sunglasses, noun: Sunglasses, price: [12, 249], w: 1.5, season: summer, tags: [heat], brands: eyewear, tpl: ["{brand} {sun_shape} {noun}", "{brand} Polarised {sun_shape} {noun}"], pools: {sun_shape: [Cat-Eye, Oversized, Round, Aviator, Square, Butterfly]}}
+          - {name: Belts, noun: Belt, price: [12, 99], w: 0.8}
+
+  - name: Men's Fashion
+    w: 7
+    style: fashion
+    brands: fashion
+    ret: 0.22
+    own: 0.25
+    life: fashion
+    dens: 1.8
+    kg: 0.5
+    axes: [size_apparel, color_fashion]
+    children:
+      - name: Men's Clothing
+        children:
+          - {name: Men's T-Shirts, noun: T-Shirt, price: [7, 59], w: 6, tpl: ["{brand} {fit} {material} {noun}", "{brand} Essential {noun} (3 Pack)", "{brand} Graphic {noun}"]}
+          - {name: Men's Shirts, noun: Shirt, price: [19, 129], w: 3.5, pools: {fit: [Oxford, Slim Fit, Regular Fit, Flannel, Linen, Overshirt, Non-Iron]}, tpl: ["{brand} {fit} {noun}", "{brand} {fit} {material} {noun}"]}
+          - {name: Polo Shirts, noun: Polo Shirt, price: [15, 119], w: 2, season: summer_mild}
+          - {name: Men's Jeans, noun: Jeans, price: [29, 179], axes: [size_jeans_m, color_fashion], w: 4, ret: 0.27, pools: {fit: [Slim, Straight, Tapered, Relaxed, Skinny, Loose, Regular]}, tpl: ["{brand} {fit} Fit {noun}", "{brand} {fit} Stretch {noun}"]}
+          - {name: Chinos & Trousers, noun: Chinos, price: [25, 149], w: 2.5}
+          - {name: Hoodies & Sweatshirts, noun: Hoodie, price: [19, 129], w: 4, season: winter_mild, tpl: ["{brand} {fit} {material} {noun}", "{brand} Zip-Through {noun}", "{brand} Crew Neck Sweatshirt"]}
+          - {name: Men's Knitwear, noun: Jumper, price: [25, 199], w: 2, season: winter_mild, pools: {material: [Merino, Lambswool, Cotton, Cashmere-Blend, Cable Knit]}}
+          - {name: Men's Jackets, noun: Jacket, price: [49, 349], w: 2.5, season: autumn, pools: {fit: [Bomber, Denim, Softshell, Harrington, Field, Leather, Quilted]}, tpl: ["{brand} {fit} {noun}"]}
+          - {name: Men's Coats, noun: Coat, price: [79, 499], w: 2, season: winter, tags: [cold], pools: {fit: [Wool, Puffer, Parka, Down, Overcoat, Peacoat]}, tpl: ["{brand} {fit} {noun}"]}
+          - {name: Suits & Blazers, noun: Suit, price: [99, 599], axes: [size_suit, color_fashion], w: 1, ret: 0.3, tpl: ["{brand} Slim Fit Two-Piece {noun}", "{brand} Wool-Blend Blazer", "{brand} Stretch {noun} Jacket"]}
+          - {name: Swim Shorts, noun: Swim Shorts, price: [12, 79], w: 1.5, season: summer, tags: [heat]}
+          - {name: Underwear & Socks, noun: Boxer Briefs (3 Pack), price: [9, 49], w: 3, life: consumer, repeat: 180, ret: 0.05, tpl: ["{brand} Cotton Stretch {noun}", "{brand} Sport Socks (6 Pack)", "{brand} Bamboo Socks (5 Pack)", "{brand} Trunks (3 Pack)"]}
+          - {name: Men's Activewear, noun: Training Shorts, price: [15, 99], w: 2, season: fitness, brands: sportwear, tpl: ["{brand} Dri-Tech {noun}", "{brand} Performance T-Shirt", "{brand} Tapered Joggers", "{brand} Running Half-Zip"]}
+      - name: Men's Shoes
+        style: shoes
+        axes: [shoe_m, color_fashion]
+        ret: 0.22
+        kg: 1.1
+        children:
+          - {name: Men's Sneakers, noun: Sneakers, price: [39, 219], w: 5, brands: shoes}
+          - {name: Men's Boots, noun: Boots, price: [59, 299], w: 2.5, season: winter, tags: [cold], brands: shoes, tpl: ["{brand} {shoe_mat} Chelsea {noun}", "{brand} Lace-Up Worker {noun}", "{brand} Waterproof Hiking {noun}"]}
+          - {name: Formal Shoes, noun: Derby Shoes, price: [59, 299], w: 1.5, brands: shoes, tpl: ["{brand} {shoe_mat} {noun}", "{brand} Leather Oxford Shoes", "{brand} Suede Loafers"]}
+          - {name: Men's Sandals, noun: Sandals, price: [19, 119], w: 1.2, season: summer, brands: shoes}
+      - name: Men's Accessories
+        axes: [color_fashion]
+        ret: 0.1
+        children:
+          - {name: Men's Wallets, noun: Wallet, price: [12, 149], w: 1.5, brands: bags, tags: [gift], tpl: ["{brand} RFID Leather {noun}", "{brand} Slim Card {noun}", "{brand} Bifold {noun}"]}
+          - {name: Men's Belts, noun: Belt, price: [15, 99], w: 1}
+          - {name: Caps & Beanies, noun: Cap, price: [9, 49], w: 1.5, tpl: ["{brand} Baseball {noun}", "{brand} Ribbed Beanie", "{brand} Bucket Hat"]}
+          - {name: Men's Sunglasses, noun: Sunglasses, price: [15, 249], w: 1.2, season: summer, tags: [heat], brands: eyewear}
+          - {name: Ties, noun: Tie, price: [15, 89], w: 0.5, pools: {material: [Silk, Knitted, Wool, Linen]}}
+          - {name: Men's Backpacks & Bags, noun: Backpack, price: [25, 249], w: 1.2, brands: bags, tags: [school]}
+
+  - name: Kids & Baby
+    w: 7
+    style: fashion
+    brands: kids
+    ret: 0.15
+    own: 0.45
+    life: consumer
+    dens: 1.2
+    kg: 0.5
+    children:
+      - name: Baby Care
+        children:
+          - {name: Diapers, noun: Diapers, price: [9, 49], axes: [diaper_size], w: 6, style: grocery, life: evergreen, repeat: 21, qty: 4, ret: 0.01, kg: 3, tpl: ["{brand} {diaper_line} {noun}, Monthly Box", "{brand} {diaper_line} Pants", "{brand} {diaper_line} {noun} Jumbo Pack"], pools: {diaper_line: [Premium Care, Dry Night, Sensitive, Active Fit, Eco]}, brands: babycare}
+          - {name: Baby Wipes, noun: Baby Wipes, price: [3, 25], w: 3, style: grocery, life: evergreen, repeat: 20, qty: 6, ret: 0.01, kg: 1, tpl: ["{brand} Sensitive {noun} (12 x 56)", "{brand} Water {noun} (4 x 60)", "{brand} Fragrance-Free {noun}"], brands: babycare}
+          - {name: Baby Formula, noun: Infant Formula, price: [12, 39], w: 2.5, style: grocery, life: evergreen, repeat: 14, qty: 4, ret: 0.005, vat: reduced, kg: 0.9, tpl: ["{brand} {formula_stage} {noun} 800 g", "{brand} Organic {formula_stage} Milk"], pools: {formula_stage: [First Infant, Follow-On, Growing-Up, Comfort, Hypoallergenic]}, brands: babycare}
+          - {name: Strollers & Prams, noun: Stroller, price: [149, 1199], axes: [color_home], w: 2, style: generic, life: home, kg: 12, tpl: ["{brand} {home_coll} {noun}", "{brand} {home_coll} 3-in-1 Travel System", "{brand} Compact Travel {noun}"], brands: babygear}
+          - {name: Car Seats, noun: Car Seat, price: [69, 599], axes: [color_home], w: 1.5, style: generic, life: home, kg: 8, tpl: ["{brand} {home_coll} i-Size {noun}", "{brand} {home_coll} 360° Rotating {noun}", "{brand} Booster Seat {model}"], brands: babygear}
+          - {name: Baby Monitors, noun: Baby Monitor, price: [39, 349], w: 1, style: tech, life: tech, brands: babygear}
+          - {name: Baby Carriers, noun: Baby Carrier, price: [29, 199], w: 0.8, style: generic, brands: babygear}
+          - {name: High Chairs, noun: High Chair, price: [49, 349], w: 0.8, style: furniture, brands: babygear, kg: 8}
+          - {name: Baby Clothing, noun: Bodysuit Set, price: [9, 59], axes: [size_baby, color_fashion], w: 3, life: fashion, tags: [gift], tpl: ["{brand} Organic Cotton {noun} (5 Pack)", "{brand} Sleepsuit", "{brand} Knitted Romper", "{brand} Baby Snowsuit"]}
+      - name: Kids' Fashion
+        life: fashion
+        axes: [size_kids, color_fashion]
+        ret: 0.2
+        children:
+          - {name: Girls' Clothing, noun: Dress, price: [9, 79], w: 3, tpl: ["{brand} Girls' {fit} {noun}", "{brand} Girls' Printed T-Shirt", "{brand} Girls' Leggings (2 Pack)", "{brand} Girls' Hoodie"]}
+          - {name: Boys' Clothing, noun: T-Shirt, price: [9, 69], w: 3, tpl: ["{brand} Boys' {fit} {noun}", "{brand} Boys' Joggers", "{brand} Boys' Hoodie", "{brand} Boys' Denim Jeans"]}
+          - {name: Kids' Shoes, noun: Sneakers, price: [19, 99], axes: [shoe_k, color_fashion], w: 2.5, style: shoes, brands: shoes, tags: [school], tpl: ["{brand} Kids' {shoe_line} {noun}", "{brand} Kids' Light-Up {noun}", "{brand} Kids' Velcro {noun}"]}
+          - {name: Kids' Jackets & Snowsuits, noun: Winter Jacket, price: [29, 149], w: 2, season: winter, tags: [cold], tpl: ["{brand} Kids' Waterproof {noun}", "{brand} Kids' Snowsuit", "{brand} Kids' Puffer {noun}"]}
+          - {name: School Backpacks, noun: School Backpack, price: [19, 149], axes: [color_basic], w: 2, season: school, tags: [school], style: generic, tpl: ["{brand} Ergonomic {noun} Set", "{brand} {toy_theme} {noun}", "{brand} Lightweight {noun}"]}
+
+  - name: Toys & Games
+    w: 5
+    style: toy
+    brands: toys
+    ret: 0.04
+    own: 0.45
+    life: toy
+    dens: 1.2
+    kg: 0.8
+    season: gifting
+    tags: [gift, blackfriday]
+    children:
+      - name: Toys
+        children:
+          - {name: Building Sets, noun: Building Set, price: [9, 299], w: 5, tpl: ["{brand} {toy_theme} {noun} ({pcs} Pieces)", "{brand} {toy_theme} {noun}"], pools: {pcs: ["120", "256", "480", "735", "1240", "2100", "3500"]}}
+          - {name: Dolls & Accessories, noun: Doll, price: [9, 129], w: 2.5, tpl: ["{brand} {doll_kind} {noun}", "{brand} Dollhouse {toy_theme}"], pools: {doll_kind: [Fashion, Baby, Ballerina, Princess, Rag, Collector]}}
+          - {name: Action Figures, noun: Action Figure, price: [9, 99], w: 2}
+          - {name: Plush Toys, noun: Plush, price: [7, 59], w: 2, tpl: ["{brand} {animal} {noun} 30 cm", "{brand} Giant {animal} {noun}", "{brand} Cuddly {animal}"], pools: {animal: [Bear, Bunny, Unicorn, Dinosaur, Fox, Panda, Sloth, Octopus, Elephant, Dragon]}, season: valentine}
+          - {name: Remote Control Toys, noun: RC Car, price: [19, 249], w: 2, tpl: ["{brand} {toy_theme} {noun} 1:16", "{brand} Off-Road {noun}", "{brand} Stunt Drone for Kids"]}
+          - {name: Educational Toys, noun: Learning Kit, price: [9, 129], w: 2, tpl: ["{brand} STEM {toy_theme} {noun}", "{brand} Coding Robot", "{brand} Science {noun}"]}
+          - {name: Baby & Toddler Toys, noun: Activity Toy, price: [9, 99], w: 2, tpl: ["{brand} Wooden {noun}", "{brand} Musical {noun}", "{brand} Stacking Rings", "{brand} Activity Cube"]}
+          - {name: Outdoor Toys, noun: Water Blaster, price: [9, 299], w: 1.5, season: summer, tags: [heat], tpl: ["{brand} {noun} XL", "{brand} Kids' Trampoline 305 cm", "{brand} Sandpit with Cover", "{brand} Kids' Scooter", "{brand} Swing Set"]}
+          - {name: Arts & Crafts, noun: Craft Set, price: [7, 69], w: 1.5, tpl: ["{brand} {toy_theme} {noun}", "{brand} Kids' Paint Set", "{brand} Modelling Clay (24 Colours)", "{brand} Bead Kit"]}
+          - {name: Costumes, noun: Costume, price: [12, 69], axes: [size_kids], w: 1, season: costume, tpl: ["{brand} {costume} {noun}", "{brand} Kids' {costume} Dress-Up Set"], pools: {costume: [Witch, Vampire, Skeleton, Pirate, Princess, Astronaut, Dinosaur, Superhero, Pumpkin, Ninja]}}
+      - name: Games & Puzzles
+        children:
+          - {name: Board Games, noun: Board Game, price: [12, 89], w: 3, tpl: ["{game_name} - {game_kind}"], pools: {game_name: ["Settlers of {b_place}", "Ticket to {b_place}", "{b_adj} Kingdoms", "Codeword", "Dragon's Hoard", "Harbour Masters", "Wingspan Isles", "The {b_adj} Tower", "Pandora's Box", "Tiny Towns of {b_place}"], game_kind: [Strategy Game, Family Game, Party Game, Card Game, Cooperative Game]}, brands: games}
+          - {name: Puzzles, noun: Jigsaw Puzzle, price: [7, 49], w: 2, tpl: ["{brand} {puzzle_motif} {noun} ({pcs} Pieces)"], pools: {puzzle_motif: [Venice Canals, Alpine Lake, Night Sky, Vintage Map, Cat Café, Tuscan Village, Northern Lights, Lighthouse, Flower Market], pcs: ["500", "1000", "1500", "2000", "3000"]}, season: winter_mild, brands: games}
+          - {name: Card Games, noun: Card Game, price: [5, 29], w: 1, brands: games}
+
+  - name: Home & Living
+    w: 10
+    style: home
+    brands: home
+    ret: 0.1
+    own: 0.35
+    life: home
+    dens: 1.4
+    kg: 2
+    children:
+      - name: Furniture
+        style: furniture
+        ret: 0.08
+        kg: 30
+        brands: furniture
+        children:
+          - {name: Sofas, noun: 3-Seater Sofa, price: [299, 2499], axes: [color_home], w: 2.5, kg: 60, tpl: ["{brand} {home_coll} {noun}, {material_home}", "{brand} {home_coll} Corner Sofa", "{brand} {home_coll} Sofa Bed"]}
+          - {name: Armchairs, noun: Armchair, price: [129, 999], axes: [color_home], w: 1.5}
+          - {name: Beds, noun: Bed Frame, price: [149, 1499], axes: [mattress], w: 2, tpl: ["{brand} {home_coll} {noun}", "{brand} {home_coll} Upholstered {noun}", "{brand} {home_coll} Storage Bed"]}
+          - {name: Mattresses, noun: Mattress, price: [129, 1299], axes: [mattress], w: 2.5, brands: sleep, ret: 0.12, tpl: ["{brand} {mattress_kind} {noun}", "{brand} {home_coll} {mattress_kind} {noun}"], pools: {mattress_kind: [Memory Foam, Hybrid Pocket Spring, 7-Zone Cold Foam, Latex, Hybrid]}, rel: [Pillows, Duvets, Bed Linen]}
+          - {name: Wardrobes, noun: Wardrobe, price: [99, 1299], axes: [color_home], w: 1}
+          - {name: Desks, noun: Desk, price: [69, 899], axes: [color_home], w: 1.5, tags: [school], tpl: ["{brand} {home_coll} {noun}", "{brand} Electric Standing {noun}", "{brand} Corner Gaming {noun}"]}
+          - {name: Office Chairs, noun: Office Chair, price: [59, 799], axes: [color_home], w: 2, brands: office_furniture, tpl: ["{brand} Ergonomic {noun}", "{brand} {home_coll} Mesh {noun}", "{brand} Executive {noun}"]}
+          - {name: Dining Tables, noun: Dining Table, price: [99, 1499], w: 1}
+          - {name: Dining Chairs, noun: Dining Chairs (Set of 2), price: [59, 499], axes: [color_home], w: 1.2}
+          - {name: Bookcases & Shelves, noun: Bookcase, price: [39, 499], axes: [color_home], w: 1.2}
+          - {name: TV Stands, noun: TV Stand, price: [49, 599], w: 0.8}
+          - {name: Chests of Drawers, noun: Chest of Drawers, price: [69, 699], axes: [color_home], w: 0.8}
+      - name: Home Textiles
+        brands: textiles
+        ret: 0.12
+        kg: 1.5
+        children:
+          - {name: Bed Linen, noun: Duvet Cover Set, price: [19, 199], axes: [bed_linen, color_home], w: 3, tpl: ["{brand} {home_coll} {tex_mat} {noun}", "{brand} {tex_mat} {noun}"], pools: {tex_mat: [Cotton Satin, Percale, Linen, Flannel, Jersey, Seersucker, Renforcé]}}
+          - {name: Duvets, noun: Duvet, price: [29, 349], axes: [bed_linen], w: 1.5, season: winter_mild, tpl: ["{brand} {season_duvet} {noun}", "{brand} Down Alternative {noun}"], pools: {season_duvet: [All-Season, Summer, Winter, 4-Seasons]}}
+          - {name: Pillows, noun: Pillow, price: [12, 149], w: 2, tpl: ["{brand} Memory Foam {noun}", "{brand} Down {noun} 80x80 cm", "{brand} Ergonomic Neck {noun}", "{brand} {noun} Set of 2"]}
+          - {name: Towels, noun: Towel Set, price: [12, 99], axes: [color_home], w: 2, tpl: ["{brand} {home_coll} {noun}", "{brand} Organic Cotton Bath Towel", "{brand} Waffle {noun}"]}
+          - {name: Blankets & Throws, noun: Throw, price: [15, 149], axes: [color_home], w: 1.5, season: winter_mild, tags: [gift, cold]}
+          - {name: Curtains, noun: Curtains, price: [15, 149], axes: [color_home], w: 1.5, tpl: ["{brand} Blackout {noun} (2 Panels)", "{brand} Linen-Look {noun}", "{brand} Sheer {noun}"]}
+          - {name: Rugs, noun: Rug, price: [29, 699], axes: [rug_size], w: 2, tpl: ["{brand} {home_coll} {rug_kind} {noun}"], pools: {rug_kind: [Berber, Shaggy, Vintage, Jute, Washable, Geometric, Low-Pile]}}
+      - name: Kitchen & Dining
+        brands: kitchenware
+        ret: 0.06
+        children:
+          - {name: Cookware Sets, noun: Cookware Set, price: [49, 499], w: 1.5, tpl: ["{brand} {pan_mat} {noun}, {pcs} Pieces"], pools: {pan_mat: [Stainless Steel, Non-Stick, Cast Iron, Ceramic, Copper], pcs: ["5", "8", "10", "12"]}, tags: [gift]}
+          - {name: Frying Pans, noun: Frying Pan, price: [15, 179], w: 2.5, tpl: ["{brand} {pan_mat} {noun} {cm} cm", "{brand} Induction {noun} {cm} cm"], pools: {pan_mat: [Stainless Steel, Non-Stick, Cast Iron, Ceramic, Carbon Steel], cm: ["20", "24", "28", "32"]}}
+          - {name: Kitchen Knives, noun: Chef's Knife, price: [12, 299], w: 1.5, tpl: ["{brand} {knife_line} {noun} 20 cm", "{brand} {knife_line} Knife Block Set", "{brand} Santoku Knife"], pools: {knife_line: [Damascus, Classic, Pro, Japanese Steel, Forged]}, tags: [gift]}
+          - {name: Dinnerware, noun: Dinner Set, price: [19, 249], w: 1.5, tpl: ["{brand} {home_coll} {noun} for 4", "{brand} {home_coll} Stoneware Plates (Set of 6)"]}
+          - {name: Glassware, noun: Glasses (Set of 6), price: [9, 99], w: 1.2}
+          - {name: Cutlery, noun: Cutlery Set, price: [15, 199], w: 1}
+          - {name: Food Storage, noun: Food Storage Containers, price: [9, 59], w: 1.5, life: consumer, tpl: ["{brand} Glass {noun} (Set of 5)", "{brand} Vacuum Sealer Bags", "{brand} Airtight Pantry Jars"]}
+          - {name: Bakeware, noun: Baking Tray, price: [7, 69], w: 1, season: xmas}
+          - {name: Kitchen Utensils, noun: Utensil Set, price: [7, 59], w: 1.5, life: consumer}
+          - {name: Water Bottles & Mugs, noun: Insulated Bottle, price: [9, 49], axes: [color_basic], w: 1.5, season: summer_mild, tpl: ["{brand} {noun} 750 ml", "{brand} Travel Mug 450 ml", "{brand} Kids' Water Bottle"]}
+      - name: Home Decor
+        brands: decor
+        children:
+          - {name: Candles & Home Fragrance, noun: Scented Candle, price: [7, 69], w: 2, season: winter_mild, tags: [gift], tpl: ["{brand} {scent} {noun}", "{brand} {scent} Reed Diffuser"], pools: {scent: [Fig & Cedar, Vanilla Amber, Sea Salt, Lavender, Cinnamon, Fresh Linen, Black Tea, Orange Blossom]}}
+          - {name: Vases, noun: Vase, price: [9, 129], w: 1}
+          - {name: Picture Frames, noun: Picture Frame, price: [7, 69], w: 1}
+          - {name: Wall Art, noun: Poster Print, price: [9, 199], w: 1.2, tpl: ["{brand} {art_motif} {noun} 50x70 cm", "{brand} {art_motif} Canvas Print"], pools: {art_motif: [Abstract Line, Botanical, Coastal, Vintage Map, Mid-Century, Mountain, Matisse-Style]}}
+          - {name: Mirrors, noun: Wall Mirror, price: [19, 299], w: 1}
+          - {name: Clocks, noun: Wall Clock, price: [12, 149], w: 0.6}
+          - {name: Artificial Plants, noun: Artificial Plant, price: [9, 149], w: 0.8}
+          - {name: Christmas Decorations, noun: Christmas Tree, price: [5, 299], w: 1.5, season: xmas, tags: [xmas], life: evergreen, tpl: ["{brand} Artificial {noun} {tree_h}", "{brand} Glass Baubles (Set of 24)", "{brand} Advent Wreath", "{brand} Christmas Nativity Set", "{brand} Tree Skirt"], pools: {tree_h: [150 cm, 180 cm, 210 cm]}, brands: xmas}
+      - name: Lighting
+        brands: lighting
+        children:
+          - {name: Ceiling Lights, noun: Pendant Light, price: [19, 499], w: 1.5}
+          - {name: Floor Lamps, noun: Floor Lamp, price: [29, 399], w: 1}
+          - {name: Table Lamps, noun: Table Lamp, price: [15, 249], w: 1.2}
+          - {name: LED Bulbs, noun: LED Bulb, price: [3, 29], w: 1.5, style: generic, life: evergreen, repeat: 240, qty: 4, tpl: ["{brand} {noun} E27 {watts}W Warm White ({pack_n})", "{brand} Filament {noun} E14 ({pack_n})", "{brand} GU10 LED Spot ({pack_n})"], pools: {watts: ["4", "7", "9", "13"], pack_n: [1 Pack, 3 Pack, 6 Pack]}}
+          - {name: String Lights, noun: String Lights, price: [7, 69], w: 1, season: xmas, tags: [xmas], tpl: ["{brand} Warm White LED {noun} {len}", "{brand} Solar Fairy {noun}", "{brand} Curtain Light 3x3 m"], pools: {len: [5 m, 10 m, 20 m]}}
+      - name: Storage & Organisation
+        brands: storage
+        children:
+          - {name: Storage Boxes, noun: Storage Box, price: [7, 59], w: 1.5, tpl: ["{brand} Stackable {noun} (Set of 3)", "{brand} Underbed {noun}", "{brand} Fabric {noun}"]}
+          - {name: Shelving Units, noun: Shelving Unit, price: [29, 199], w: 1}
+          - {name: Laundry Baskets, noun: Laundry Basket, price: [9, 69], w: 0.8}
+          - {name: Hangers, noun: Velvet Hangers (50 pcs), price: [9, 39], w: 0.8, life: consumer}
+      - name: Bathroom
+        brands: bathroom
+        children:
+          - {name: Shower Heads, noun: Shower Head, price: [15, 199], w: 1, tpl: ["{brand} Rain {noun} 25 cm", "{brand} Water-Saving Hand {noun}", "{brand} Shower System with Thermostat"]}
+          - {name: Bath Mats, noun: Bath Mat, price: [9, 49], axes: [color_home], w: 0.8}
+          - {name: Bathroom Accessories, noun: Soap Dispenser, price: [7, 79], w: 1, tpl: ["{brand} {home_coll} {noun}", "{brand} {home_coll} Toothbrush Holder", "{brand} Bathroom Accessory Set"]}
+          - {name: Toilet Seats, noun: Toilet Seat, price: [19, 99], w: 0.6}
+
+  - name: DIY & Tools
+    w: 4
+    style: tool
+    brands: tools
+    ret: 0.05
+    own: 0.4
+    life: consumer
+    dens: 0.8
+    kg: 2.5
+    tags: [blackfriday]
+    children:
+      - name: Power Tools
+        children:
+          - {name: Cordless Drills, noun: Cordless Drill Driver, price: [39, 399], w: 3, tags: [gift, blackfriday], rel: [Tool Batteries & Chargers, Drill Bits]}
+          - {name: Impact Drivers, noun: Impact Driver, price: [59, 349], w: 1.5}
+          - {name: Angle Grinders, noun: Angle Grinder, price: [39, 299], w: 1}
+          - {name: Saws, noun: Circular Saw, price: [49, 449], w: 1.5, tpl: ["{brand} {tool_volt} {noun} {model}", "{brand} Jigsaw {model}", "{brand} Mitre Saw {model}", "{brand} {tool_volt} Reciprocating Saw"]}
+          - {name: Sanders, noun: Orbital Sander, price: [29, 249], w: 1}
+          - {name: Tool Batteries & Chargers, noun: Battery, price: [29, 199], axes: [battery_ah], w: 1.2, tpl: ["{brand} {tool_volt} {noun}", "{brand} {tool_volt} Starter Kit (2 Batteries + Charger)"]}
+          - {name: Drill Bits, noun: Drill Bit Set, price: [9, 79], w: 1, life: evergreen, style: generic}
+      - name: Hand Tools
+        style: generic
+        children:
+          - {name: Tool Sets, noun: Tool Set, price: [19, 299], w: 2, tags: [gift], tpl: ["{brand} {noun} {pcs} Pieces", "{brand} Mechanic's {noun} in Case"], pools: {pcs: ["40", "108", "130", "216"]}}
+          - {name: Screwdrivers, noun: Screwdriver Set, price: [9, 79], w: 1}
+          - {name: Hammers & Wrenches, noun: Claw Hammer, price: [9, 69], w: 1, tpl: ["{brand} {noun}", "{brand} Adjustable Wrench Set", "{brand} Combination Spanner Set"]}
+          - {name: Measuring Tools, noun: Laser Distance Meter, price: [9, 199], w: 1, tpl: ["{brand} {noun} 40 m", "{brand} Cross Line Laser Level", "{brand} Tape Measure 8 m", "{brand} Spirit Level 60 cm"]}
+      - name: Hardware & Paint
+        style: generic
+        children:
+          - {name: Screws & Fixings, noun: Screw Assortment, price: [5, 49], w: 1.5, life: evergreen}
+          - {name: Adhesives & Sealants, noun: Silicone Sealant, price: [4, 29], w: 1, life: evergreen}
+          - {name: Wall Paint, noun: Interior Wall Paint, price: [12, 119], axes: [paint_vol], w: 1.5, season: garden, tpl: ["{brand} {paint_col} {noun}, Matt", "{brand} Scrub-Resistant {noun} {paint_col}"], pools: {paint_col: [Polar White, Warm Grey, Sage Green, Dusty Blue, Terracotta, Linen, Charcoal]}}
+          - {name: Paint Brushes & Rollers, noun: Paint Roller Set, price: [5, 39], w: 0.8, season: garden}
+      - name: Electrical
+        style: generic
+        children:
+          - {name: Extension Leads, noun: Extension Lead, price: [7, 49], w: 1.2, tpl: ["{brand} {sockets}-Way {noun} with USB", "{brand} Cable Reel 25 m"], pools: {sockets: ["3", "4", "6", "8"]}}
+          - {name: Batteries, noun: Batteries, price: [4, 29], w: 1.5, life: evergreen, repeat: 120, qty: 4, tpl: ["{brand} Alkaline AA {noun} ({bpack})", "{brand} Alkaline AAA {noun} ({bpack})", "{brand} Rechargeable AA {noun} (4 Pack)", "{brand} CR2032 Coin Cell (5 Pack)"], pools: {bpack: [8 Pack, 16 Pack, 24 Pack]}, brands: batteries, tags: [xmas]}
+
+  - name: Garden & Outdoor
+    w: 4
+    style: generic
+    brands: garden
+    ret: 0.05
+    own: 0.35
+    life: home
+    dens: 0.7
+    kg: 5
+    season: garden
+    children:
+      - name: Gardening
+        children:
+          - {name: Lawn Mowers, noun: Lawn Mower, price: [99, 899], w: 2, style: tool, kg: 25, tpl: ["{brand} Cordless {noun} {tool_volt} 37 cm", "{brand} Petrol {noun} {model}", "{brand} Electric {noun} 1600 W"]}
+          - {name: Robotic Mowers, noun: Robotic Lawn Mower, price: [399, 2499], w: 1.2, style: tech, kg: 12, brands: robomow}
+          - {name: Hedge & Grass Trimmers, noun: Hedge Trimmer, price: [39, 299], w: 1.2, style: tool}
+          - {name: Garden Hoses, noun: Garden Hose, price: [15, 99], w: 1, tpl: ["{brand} Expandable {noun} 30 m", "{brand} Hose Reel Set 20 m", "{brand} Spray Gun 8 Patterns"], season: summer}
+          - {name: Pressure Washers, noun: Pressure Washer, price: [79, 599], w: 1, style: tool}
+          - {name: Plant Pots, noun: Plant Pot, price: [5, 99], w: 1.2}
+          - {name: Seeds & Bulbs, noun: Seed Collection, price: [3, 29], w: 1, life: evergreen, tpl: ["{brand} Tomato {noun}", "{brand} Wildflower Seed Mix 500 g", "{brand} Tulip Bulbs (30 pcs)", "{brand} Herb Garden {noun}"]}
+          - {name: Fertilisers & Soil, noun: Lawn Fertiliser, price: [7, 49], w: 1, life: evergreen, repeat: 120, tpl: ["{brand} {noun} 10 kg", "{brand} Potting Soil 50 l", "{brand} Organic Tomato Feed"]}
+      - name: Outdoor Living
+        children:
+          - {name: Garden Furniture, noun: Garden Lounge Set, price: [79, 1999], w: 2.5, style: furniture, brands: garden_furniture, kg: 40, season: summer, tpl: ["{brand} {home_coll} {noun}", "{brand} {home_coll} Rattan Dining Set", "{brand} Folding Garden Chairs (Set of 2)", "{brand} Sun Lounger"]}
+          - {name: Parasols & Awnings, noun: Parasol, price: [39, 599], w: 1, season: summer, tags: [heat]}
+          - {name: BBQs & Grills, noun: Gas Barbecue, price: [49, 1299], w: 2, season: bbq, tags: [heat], kg: 30, brands: bbq, tpl: ["{brand} {bbq_line} {noun} {burners} Burners", "{brand} Kettle Charcoal Grill 57 cm", "{brand} {bbq_line} Pellet Smoker", "{brand} Portable Gas Grill"], pools: {bbq_line: [Genesis, Spirit, Master, Classic, Traveler], burners: ["2", "3", "4"]}, rel: [BBQ Accessories]}
+          - {name: BBQ Accessories, noun: Grill Tool Set, price: [9, 79], w: 1, season: bbq, brands: bbq, life: consumer}
+          - {name: Pools & Paddling Pools, noun: Above-Ground Pool, price: [19, 899], w: 1.2, season: summer, tags: [heat], tpl: ["{brand} Frame {noun} 366x76 cm", "{brand} Inflatable Paddling Pool", "{brand} Pool Filter Pump", "{brand} Pool Chlorine Tablets 1 kg"]}
+          - {name: Garden Lighting, noun: Solar Garden Lights, price: [9, 99], w: 1, season: summer_mild}
+          - {name: Patio Heaters, noun: Patio Heater, price: [59, 399], w: 0.5, season: autumn}
+
+  - name: Sports & Outdoors
+    w: 6
+    style: sport
+    brands: sports
+    ret: 0.1
+    own: 0.35
+    life: consumer
+    dens: 1
+    kg: 1.5
+    children:
+      - name: Fitness
+        season: fitness
+        children:
+          - {name: Dumbbells & Weights, noun: Adjustable Dumbbells, price: [19, 399], w: 1.5, kg: 15, tpl: ["{brand} {noun} {kgw}", "{brand} Kettlebell {kgw}", "{brand} Weight Plate Set"], pools: {kgw: [2x10 kg, 2x20 kg, 24 kg, 12 kg]}}
+          - {name: Yoga & Pilates, noun: Yoga Mat, price: [9, 99], axes: [color_basic], w: 1.5, tpl: ["{brand} Non-Slip {noun} 6 mm", "{brand} Cork {noun}", "{brand} Pilates Ring", "{brand} Foam Roller"]}
+          - {name: Treadmills, noun: Treadmill, price: [299, 1999], w: 1, kg: 70, ret: 0.08}
+          - {name: Exercise Bikes, noun: Exercise Bike, price: [199, 1499], w: 1, kg: 40}
+          - {name: Fitness Accessories, noun: Resistance Bands, price: [7, 49], w: 1.5, tpl: ["{brand} {noun} Set", "{brand} Skipping Rope", "{brand} Pull-Up Bar", "{brand} Ab Roller"]}
+      - name: Cycling
+        season: summer_mild
+        children:
+          - {name: Bikes, noun: Trekking Bike, price: [299, 2499], axes: [bike_frame], w: 1.5, kg: 15, brands: bikes, tpl: ["{brand} {sport_line} {noun} 28\"", "{brand} {sport_line} Gravel Bike", "{brand} {sport_line} Mountain Bike 29\"", "{brand} City Bike 7-Speed"]}
+          - {name: E-Bikes, noun: E-Bike, price: [999, 4499], axes: [bike_frame], w: 1.2, kg: 25, brands: bikes, tpl: ["{brand} {sport_line} Trekking {noun} 625 Wh", "{brand} Urban {noun}", "{brand} {sport_line} E-MTB"]}
+          - {name: Bike Helmets, noun: Bike Helmet, price: [29, 249], axes: [helmet_size, color_basic], w: 1.2}
+          - {name: Bike Lights & Locks, noun: Bike Light Set, price: [9, 99], w: 1.2, season: autumn, tpl: ["{brand} USB Rechargeable {noun}", "{brand} Folding Bike Lock", "{brand} U-Lock with Cable"]}
+          - {name: Cycling Clothing, noun: Cycling Jersey, price: [19, 149], axes: [size_apparel], w: 0.8, ret: 0.2}
+      - name: Running
+        children:
+          - {name: Running Shoes, noun: Running Shoes, price: [49, 229], axes: [shoe_m, color_fashion], w: 3, ret: 0.18, brands: running, life: fashion, tpl: ["{brand} {sport_line} {gen} {noun}", "{brand} {sport_line} Trail {noun}", "{brand} Women's {sport_line} {noun}"]}
+          - {name: Running Apparel, noun: Running Shirt, price: [15, 119], axes: [size_apparel, color_fashion], w: 1.5, brands: running, ret: 0.18}
+          - {name: Sports Watches, noun: GPS Sports Watch, price: [99, 799], w: 1.2, style: tech, life: tech, brands: tech}
+      - name: Camping & Hiking
+        season: summer
+        children:
+          - {name: Tents, noun: Tent, price: [39, 799], w: 1.2, kg: 4, brands: outdoor, tpl: ["{brand} {sport_line} {persons}-Person {noun}", "{brand} Pop-Up {noun}", "{brand} Inflatable Family {noun}"], pools: {persons: ["2", "3", "4", "6"]}, rel: [Sleeping Bags, Camping Stoves]}
+          - {name: Sleeping Bags, noun: Sleeping Bag, price: [25, 349], w: 1, brands: outdoor}
+          - {name: Hiking Backpacks, noun: Hiking Backpack, price: [29, 299], w: 1.2, brands: outdoor, tpl: ["{brand} {sport_line} {litres} l {noun}"], pools: {litres: ["20", "30", "45", "65"]}}
+          - {name: Hiking Boots, noun: Hiking Boots, price: [59, 299], axes: [shoe_m], w: 1.5, brands: outdoor, ret: 0.2, season: summer_mild}
+          - {name: Camping Stoves & Cookware, noun: Camping Stove, price: [19, 199], w: 0.8, brands: outdoor}
+          - {name: Headlamps & Torches, noun: Headlamp, price: [9, 99], w: 0.8, brands: outdoor, season: autumn}
+          - {name: Outdoor Jackets, noun: Hardshell Jacket, price: [59, 499], axes: [size_apparel, color_fashion], w: 1.5, brands: outdoor, ret: 0.2, season: autumn}
+      - name: Winter Sports
+        season: ski
+        brands: winter
+        children:
+          - {name: Skis, noun: All-Mountain Skis, price: [199, 899], axes: [ski_length], w: 1, kg: 6}
+          - {name: Ski Boots, noun: Ski Boots, price: [149, 599], axes: [shoe_m], w: 0.8, ret: 0.25}
+          - {name: Snowboards, noun: Snowboard, price: [199, 699], w: 0.6}
+          - {name: Ski Helmets, noun: Ski Helmet, price: [49, 299], axes: [helmet_size], w: 0.8}
+          - {name: Ski Goggles, noun: Ski Goggles, price: [29, 249], w: 0.8}
+          - {name: Ski Jackets, noun: Ski Jacket, price: [99, 599], axes: [size_apparel, color_fashion], w: 1, ret: 0.2}
+      - name: Team & Racket Sports
+        children:
+          - {name: Footballs, noun: Football, price: [12, 149], w: 1, tags: [football], tpl: ["{brand} {sport_line} Match {noun} Size 5", "{brand} Training {noun}"]}
+          - {name: Football Boots, noun: Football Boots, price: [29, 279], axes: [shoe_m], w: 1.2, ret: 0.2, tags: [football]}
+          - {name: Football Jerseys, noun: Replica Jersey, price: [29, 99], axes: [size_apparel], w: 1, tags: [football], tpl: ["{brand} National Team Home {noun} {season_y}", "{brand} Club Away {noun} {season_y}"], pools: {season_y: [2025/26, 2026]}}
+          - {name: Tennis, noun: Tennis Racket, price: [29, 279], w: 0.8, season: summer_mild}
+          - {name: Padel, noun: Padel Racket, price: [39, 299], w: 1, season: summer_mild, brands: padel}
+          - {name: Table Tennis, noun: Table Tennis Set, price: [9, 499], w: 0.6}
+      - name: Water Sports
+        season: summer
+        children:
+          - {name: Stand Up Paddle Boards, noun: Inflatable SUP Board, price: [199, 899], w: 1, tags: [heat], kg: 10}
+          - {name: Swimming Gear, noun: Swimming Goggles, price: [7, 59], w: 1, tags: [heat]}
+          - {name: Wetsuits, noun: Wetsuit, price: [59, 399], axes: [size_apparel], w: 0.5, ret: 0.2}
+
+  - name: Beauty & Personal Care
+    w: 8
+    style: beauty
+    brands: beauty
+    ret: 0.02
+    own: 0.5
+    life: consumer
+    dens: 1.2
+    kg: 0.3
+    children:
+      - name: Skincare
+        children:
+          - {name: Face Moisturisers, noun: Face Cream, price: [6, 119], axes: [beauty_ml], w: 3, repeat: 60, qty: 2}
+          - {name: Serums, noun: Face Serum, price: [8, 149], w: 3, repeat: 60, tpl: ["{brand} {beauty_ing} {noun} 30 ml", "{brand} {beauty_line} {noun}"]}
+          - {name: Cleansers, noun: Cleansing Gel, price: [5, 49], w: 2, repeat: 60}
+          - {name: Sunscreen, noun: Sun Cream SPF 50, price: [7, 49], w: 2.5, season: summer, tags: [heat], repeat: 45, brands: sun}
+          - {name: Face Masks, noun: Sheet Mask (5 pcs), price: [4, 39], w: 1, repeat: 45}
+          - {name: Eye Creams, noun: Eye Cream, price: [9, 99], w: 1}
+      - name: Makeup
+        children:
+          - {name: Foundation, noun: Foundation, price: [7, 59], w: 2, repeat: 90, brands: makeup}
+          - {name: Mascara, noun: Mascara, price: [5, 39], w: 2, repeat: 90, brands: makeup, tpl: ["{brand} {mascara} {noun}"], pools: {mascara: [Volume Million, Lash Lift, Waterproof Curl, Length Extreme, Tubing]}}
+          - {name: Lipstick, noun: Lipstick, price: [5, 49], w: 2, brands: makeup, tags: [valentine]}
+          - {name: Eyeshadow Palettes, noun: Eyeshadow Palette, price: [7, 69], w: 1.2, brands: makeup, tags: [gift]}
+          - {name: Nail Polish, noun: Nail Polish, price: [3, 25], w: 1.2, brands: makeup}
+          - {name: Makeup Brushes, noun: Brush Set, price: [7, 79], w: 0.8, brands: makeup}
+      - name: Hair Care
+        children:
+          - {name: Shampoo, noun: Shampoo, price: [3, 39], w: 3, repeat: 45, qty: 3, brands: haircare}
+          - {name: Conditioner, noun: Conditioner, price: [3, 39], w: 1.5, repeat: 50, brands: haircare}
+          - {name: Hair Styling, noun: Styling Gel, price: [4, 39], w: 1.2, brands: haircare, tpl: ["{brand} {noun}", "{brand} Heat Protection Spray", "{brand} Texturising Sea Salt Spray", "{brand} Matte Clay"]}
+          - {name: Hair Colour, noun: Permanent Hair Colour, price: [5, 19], w: 1, repeat: 42, brands: haircare}
+      - name: Fragrances
+        brands: fragrance
+        season: gifting
+        tags: [gift, valentine]
+        children:
+          - {name: Women's Perfume, noun: Eau de Parfum, price: [19, 249], axes: [perfume_ml], w: 3, tpl: ["{brand} {fragrance_name} {noun}"], pools: {fragrance_name: [Rose Noire, Amber Nuit, Fleur de Sel, Oud Velours, Jardin Secret, Bleu Minuit, Musc Blanc, Iris Poudré, Vanille Sauvage]}}
+          - {name: Men's Fragrance, noun: Eau de Toilette, price: [19, 199], axes: [perfume_ml], w: 2.5, tpl: ["{brand} {fragrance_name} {noun}"], pools: {fragrance_name: [Cedar Noir, Vetiver Intense, Aqua Sport, Leather Club, Bergamot Riviera, Tobacco Oak, Marine Storm]}}
+          - {name: Gift Sets, noun: Gift Set, price: [15, 149], w: 1.5, season: xmas, tags: [gift, xmas]}
+      - name: Men's Grooming
+        brands: grooming
+        children:
+          - {name: Razors & Blades, noun: Razor Blades (8 pcs), price: [7, 39], w: 2, repeat: 60, qty: 2, tpl: ["{brand} {razor_line} {noun}", "{brand} {razor_line} Razor with 2 Blades"], pools: {razor_line: [Fusion Pro, Sensitive 5, Titan Glide, Precision 3]}}
+          - {name: Shaving Cream & Aftershave, noun: Shaving Foam, price: [3, 39], w: 1.2, repeat: 60}
+          - {name: Beard Care, noun: Beard Oil, price: [7, 39], w: 1, tags: [gift]}
+      - name: Bath & Body
+        children:
+          - {name: Shower Gel, noun: Shower Gel, price: [2, 19], w: 2, repeat: 30, qty: 4, style: grocery, pools: {variety: [Ocean Fresh, Coconut, Sensitive, Lavender, Men Sport, Citrus, Oat Milk]}}
+          - {name: Body Lotion, noun: Body Lotion, price: [3, 39], w: 1.5, repeat: 45}
+          - {name: Deodorant, noun: Deodorant, price: [2, 19], w: 2, repeat: 35, qty: 4, style: grocery, pools: {variety: [48h Fresh, Invisible, Sensitive, Men Sport, Natural, Cotton]}}
+          - {name: Toothpaste, noun: Toothpaste, price: [2, 12], w: 1.5, repeat: 40, qty: 4, style: grocery, pools: {variety: [Whitening, Sensitive, Herbal, Kids, Total Care, Charcoal]}, brands: oral}
+
+  - name: Health & Household
+    w: 6
+    style: grocery
+    brands: household
+    ret: 0.01
+    own: 0.8
+    life: evergreen
+    dens: 0.7
+    kg: 2
+    children:
+      - name: Household Supplies
+        children:
+          - {name: Laundry Detergent, noun: Laundry Detergent, price: [5, 39], w: 3, repeat: 40, qty: 3, tpl: ["{brand} {variety} {noun} {wash} Washes", "{brand} Laundry Pods ({wash} pcs)", "{brand} Colour {noun} Liquid"], pools: {wash: ["20", "40", "60", "80"]}, kg: 3}
+          - {name: Dishwasher Tablets, noun: Dishwasher Tablets, price: [5, 29], w: 2.5, repeat: 45, qty: 3, tpl: ["{brand} All-in-One {noun} ({tabs} pcs)", "{brand} Eco {noun} ({tabs} pcs)"], pools: {tabs: ["40", "60", "90", "120"]}}
+          - {name: Cleaning Products, noun: All-Purpose Cleaner, price: [2, 19], w: 2, repeat: 45, qty: 4}
+          - {name: Toilet Paper & Kitchen Rolls, noun: Toilet Paper, price: [4, 25], w: 2.5, repeat: 30, qty: 3, tpl: ["{brand} {variety} {noun} 3-Ply (24 Rolls)", "{brand} Kitchen Rolls (8 Rolls)", "{brand} Recycled {noun} (16 Rolls)"], kg: 4}
+          - {name: Bin Bags, noun: Bin Bags, price: [3, 15], w: 1, repeat: 60, qty: 3}
+          - {name: Fabric Softener, noun: Fabric Softener, price: [3, 15], w: 1, repeat: 50}
+      - name: Health
+        brands: health
+        children:
+          - {name: Vitamins & Supplements, noun: Vitamin D3, price: [5, 49], w: 3, repeat: 60, qty: 3, season: winter_mild, tpl: ["{brand} {vitamin} ({caps} Capsules)"], pools: {vitamin: [Vitamin D3 2000 IU, Magnesium 400 mg, Omega-3 Fish Oil, Multivitamin, Zinc + Vitamin C, Vitamin B12, Iron, Collagen Peptides], caps: ["60", "90", "120", "365"]}}
+          - {name: Sports Nutrition, noun: Whey Protein, price: [9, 69], w: 2, repeat: 35, season: fitness, brands: nutrition, tpl: ["{brand} {noun} 1 kg, {flavour}", "{brand} Creatine Monohydrate 500 g", "{brand} Protein Bars (12 x 60 g), {flavour}"], pools: {flavour: [Chocolate, Vanilla, Strawberry, Salted Caramel, Cookies & Cream, Unflavoured]}}
+          - {name: First Aid, noun: First Aid Kit, price: [4, 49], w: 1}
+          - {name: Health Monitors, noun: Blood Pressure Monitor, price: [19, 149], w: 1, style: appliance, life: tech, tpl: ["{brand} Upper Arm {noun}", "{brand} Digital Thermometer", "{brand} Smart Body Scale"]}
+
+  - name: Grocery & Drinks
+    w: 5
+    style: grocery
+    brands: grocery
+    ret: 0.005
+    own: 0.75
+    life: evergreen
+    dens: 0.9
+    kg: 1
+    vat: reduced
+    children:
+      - name: Coffee & Tea
+        brands: coffee
+        children:
+          - {name: Coffee Beans, noun: Coffee Beans, price: [6, 49], axes: [food_weight], w: 3, repeat: 30, qty: 3, tpl: ["{brand} {coffee_blend} {noun}", "{brand} {origin} Single Origin {noun}"], pools: {coffee_blend: [Espresso Intenso, Crema, Lungo, Barista Blend, Decaf, Dark Roast, Organic Blend], origin: [Ethiopia, Colombia, Brazil, Guatemala, Sumatra, Kenya]}}
+          - {name: Ground Coffee, noun: Ground Coffee, price: [4, 19], w: 1.5, repeat: 30, qty: 3}
+          - {name: Coffee Capsules, noun: Coffee Capsules, price: [3, 49], axes: [capsules], w: 3, repeat: 25, qty: 4, tpl: ["{brand} {coffee_blend} {noun}, Compatible"], pools: {coffee_blend: [Ristretto, Espresso Forte, Lungo, Vanilla, Caramel, Decaffeinato]}}
+          - {name: Tea, noun: Tea, price: [2, 29], w: 1.5, repeat: 40, tpl: ["{brand} {tea} {noun} (20 Bags)", "{brand} Loose Leaf {tea} {noun} 100 g"], pools: {tea: [Earl Grey, Green, Chamomile, Rooibos, English Breakfast, Peppermint, Chai]}}
+      - name: Snacks & Sweets
+        children:
+          - {name: Chocolate, noun: Chocolate, price: [2, 39], w: 2.5, season: easter, tags: [valentine, easter, gift], brands: chocolate, tpl: ["{brand} {choc} {noun} 100 g", "{brand} Pralines Gift Box 250 g", "{brand} {choc} {noun} Bar Multipack"], pools: {choc: [Dark 70%, Milk, Hazelnut, Sea Salt Caramel, White, Orange]}}
+          - {name: Crisps & Savoury Snacks, noun: Crisps, price: [1, 9], w: 1.5, qty: 6, tags: [football]}
+          - {name: Nuts & Dried Fruit, noun: Mixed Nuts, price: [3, 25], w: 1.2, repeat: 45}
+          - {name: Biscuits, noun: Biscuits, price: [1, 12], w: 1.2, season: xmas}
+      - name: Pantry
+        children:
+          - {name: Pasta & Rice, noun: Pasta, price: [1, 12], w: 1.5, qty: 6, repeat: 30, tpl: ["{brand} {pasta} 500 g", "{brand} Basmati Rice 1 kg", "{brand} Risotto Rice 1 kg"], pools: {pasta: [Spaghetti, Penne Rigate, Fusilli, Tagliatelle, Orecchiette, Linguine]}}
+          - {name: Olive Oil & Vinegar, noun: Extra Virgin Olive Oil, price: [5, 39], w: 1.2, repeat: 45, tpl: ["{brand} {noun} 750 ml", "{brand} {noun} 3 l Tin", "{brand} Balsamic Vinegar of Modena 500 ml"]}
+          - {name: Sauces & Condiments, noun: Pasta Sauce, price: [1, 12], w: 1, qty: 4}
+          - {name: Breakfast Cereals, noun: Granola, price: [2, 12], w: 1, repeat: 21}
+          - {name: Spices & Herbs, noun: Spice Set, price: [2, 39], w: 0.8, tags: [gift]}
+      - name: Drinks
+        children:
+          - {name: Wine, noun: Red Wine, price: [5, 79], axes: [wine_pack], w: 2, season: gifting, tags: [gift, xmas], vat: std, brands: wine, tpl: ["{brand} {grape} {wine_region} {year}", "{brand} {grape} Reserva {year}"], pools: {grape: [Tempranillo, Merlot, Pinot Noir, Riesling, Sauvignon Blanc, Primitivo, Chardonnay, Grüner Veltliner, Fetească Neagră, Rosé], wine_region: [Rioja, Bordeaux, Mosel, Toscana, Douro, Wachau, Purcari, Puglia], year: ["2019", "2020", "2021", "2022", "2023"]}}
+          - {name: Beer, noun: Craft Beer, price: [2, 39], w: 1.2, season: summer_mild, tags: [football, heat], vat: std, brands: beer, tpl: ["{brand} {beer} (24 x 0.33 l)", "{brand} {beer} Tasting Box"], pools: {beer: [Pilsner, IPA, Weissbier, Lager, Stout, Pale Ale, Alcohol-Free]}}
+          - {name: Spirits, noun: Gin, price: [15, 99], w: 1, season: gifting, tags: [gift], vat: std, brands: spirits, tpl: ["{brand} {spirit} 0.7 l", "{brand} {spirit} Gift Box"], pools: {spirit: [London Dry Gin, Single Malt Whisky 12 Years, Aged Rum, Vodka, Brandy Divin, Amaretto, Grappa]}}
+          - {name: Soft Drinks & Water, noun: Sparkling Water, price: [2, 19], w: 1.5, season: summer, tags: [heat], qty: 4, repeat: 14, tpl: ["{brand} {noun} (6 x 1.5 l)", "{brand} Cola Zero (24 x 0.33 l)", "{brand} Lemonade (6 x 1 l)", "{brand} Still Water (6 x 1.5 l)"]}
+          - {name: Juices, noun: Orange Juice, price: [1, 12], w: 0.8, qty: 4}
+
+  - name: Pet Supplies
+    w: 3
+    style: grocery
+    brands: pets
+    ret: 0.03
+    own: 0.6
+    life: evergreen
+    dens: 0.6
+    kg: 3
+    children:
+      - name: Dogs
+        children:
+          - {name: Dog Food, noun: Dry Dog Food, price: [6, 89], axes: [petfood], w: 4, repeat: 30, qty: 2, tpl: ["{brand} {pet_line} {noun}, {pet_flavour}"], pools: {pet_line: [Adult, Puppy, Senior, Grain-Free, Sensitive, Light], pet_flavour: [Chicken, Lamb & Rice, Salmon, Beef, Duck, Turkey]}, kg: 7}
+          - {name: Dog Treats, noun: Dog Treats, price: [2, 25], w: 1.5, repeat: 21, qty: 3}
+          - {name: Dog Beds, noun: Dog Bed, price: [19, 199], axes: [pet_size], w: 1, style: generic, life: home}
+          - {name: Dog Toys, noun: Dog Toy, price: [3, 29], w: 1, style: generic, life: consumer, tags: [xmas]}
+          - {name: Leads & Collars, noun: Dog Harness, price: [7, 59], axes: [pet_size], w: 1, style: generic, life: consumer}
+      - name: Cats
+        children:
+          - {name: Cat Food, noun: Cat Food, price: [3, 59], w: 4, repeat: 21, qty: 3, tpl: ["{brand} {pet_line} Wet {noun} (12 x 85 g), {pet_flavour}", "{brand} {pet_line} Dry {noun} 2 kg"], pools: {pet_line: [Adult, Kitten, Senior, Indoor, Sterilised], pet_flavour: [Chicken, Tuna, Salmon, Beef, Rabbit]}}
+          - {name: Cat Litter, noun: Clumping Cat Litter, price: [5, 29], w: 2, repeat: 25, qty: 2, kg: 10}
+          - {name: Scratching Posts, noun: Scratching Post, price: [15, 199], w: 1, style: generic, life: home}
+          - {name: Cat Toys, noun: Cat Toy Set, price: [3, 29], w: 0.8, style: generic}
+      - name: Other Pets
+        children:
+          - {name: Aquariums, noun: Aquarium Starter Kit, price: [29, 499], w: 0.5, style: generic, life: home}
+          - {name: Bird & Small Animal, noun: Bird Seed Mix, price: [3, 39], w: 0.6, repeat: 30}
+
+  - name: Books & Stationery
+    w: 5
+    style: book
+    brands: books
+    ret: 0.02
+    own: 0.85
+    life: book
+    dens: 3
+    kg: 0.5
+    vat: reduced
+    axes: [book_format]
+    children:
+      - name: Books
+        children:
+          - {name: Fiction, noun: Novel, price: [9, 29], w: 5, tags: [gift]}
+          - {name: Crime & Thrillers, noun: Thriller, price: [9, 25], w: 4, pools: {book_title: ["Death in {b_place}", "The {b_place} Murders", "Cold {b_crime}", "The {b_adj} Witness", "{b_crime} at Midnight", "The Silent {b_crime}", "No Way Back from {b_place}"], b_crime: [Case, Alibi, Verdict, Confession, Suspect, Evidence, Trail]}}
+          - {name: Science Fiction & Fantasy, noun: Novel, price: [9, 29], w: 3, pools: {book_title: ["The {b_fant} of {b_fplace}", "Children of {b_fplace}", "{b_fplace} Rising", "The Starless {b_noun}", "Throne of {b_noun2}", "The {b_fant} Protocol"], b_fant: [Crown, Engines, Witch, Void, Oracle, Blade, Archive, Dragons], b_fplace: [Aldermoor, Kharos, the Ninth Moon, Velmora, Ashfall, Eldoria, Orion Gate]}}
+          - {name: Children's Books, noun: Picture Book, price: [5, 19], w: 3, brands: kids_books, pools: {book_title: ["{animal} and the {kid_noun}", "The Little {animal}", "Goodnight, {animal}", "The {animal} Who Wanted to Fly", "Where Is {animal}?", "{animal}'s Big Adventure"], animal: [Bear, Fox, Hedgehog, Owl, Rabbit, Mouse, Otter, Penguin, Squirrel], kid_noun: [Moon, Rainbow, Lost Balloon, Giant Pumpkin, Snowflake, Magic Boots]}, season: gifting}
+          - {name: Cookbooks, noun: Cookbook, price: [12, 39], w: 1.5, tags: [gift], pools: {book_title: ["{cuisine} Kitchen", "Simply {cuisine}", "The {cuisine} Table", "{num} Easy {meal}", "One-Pot {meal}", "Plant-Based {cuisine}"], cuisine: [Italian, Nordic, Mediterranean, Portuguese, Balkan, French Bistro, Moldovan, Levantine], meal: [Dinners, Bakes, Soups, Salads, Weeknight Meals]}}
+          - {name: Self-Help, noun: Book, price: [9, 25], w: 1.5, season: fitness, pools: {book_title: ["The Art of {virtue}", "{num} Habits of {people}", "Deep {virtue}", "The {virtue} Mindset", "Unstoppable {virtue}", "Less Is More: {virtue}"], virtue: [Focus, Calm, Discipline, Resilience, Clarity, Balance, Courage], people: [Happy People, Great Leaders, Calm Parents, Successful Teams]}}
+          - {name: Biographies, noun: Biography, price: [12, 32], w: 1, pools: {book_title: ["{b_person}: A Life", "My Years in {b_place}", "The Road from {b_place}", "Memoirs of a {b_person}"]}}
+          - {name: Business & Economics, noun: Book, price: [14, 39], w: 1, pools: {book_title: ["The {biz} Playbook", "Scaling {biz}", "Zero to {biz}", "The Lean {biz}", "Data-Driven {biz}"], biz: [Startup, Growth, Marketplace, Leadership, Strategy, Product, Commerce]}}
+          - {name: Comics & Manga, noun: Graphic Novel, price: [7, 29], w: 1.5, brands: comics, pools: {book_title: ["{hero} Vol. {num}", "{hero}: {g_word2}", "{hero} Omnibus"], hero: [Night Raven, Iron Lotus, Captain Nova, Blade of Kyoto, Moonfox, Steel Samurai, Star Rangers], g_word2: [Origins, Reckoning, Uprising, Legacy, Requiem]}}
+          - {name: Textbooks & Learning, noun: Textbook, price: [15, 69], w: 1, season: school, tags: [school], pools: {book_title: ["Introduction to {subject}", "{subject} for Beginners", "Essentials of {subject}", "Advanced {subject}", "Learn {lang_s} in 30 Days"], subject: [Statistics, Economics, Organic Chemistry, Physics, Data Science, Accounting, Marketing], lang_s: [Spanish, German, Italian, French, Romanian, Polish, Dutch]}}
+      - name: Music & Film
+        axes: []
+        brands: media
+        children:
+          - {name: Vinyl Records, noun: Vinyl LP, price: [19, 49], w: 1.2, tags: [gift], tpl: ["{artist} - {album} (Vinyl LP)"], pools: {artist: [The Northern Lights, Luna Park, Elena Voss, Midnight Harbour, Los Gatos Azules, Kosmos Trio, The Paper Kites Orchestra, Aurora Fields], album: ["{b_adj} Days", "Live in {b_place}", "{b_sky}", "Greatest Hits", "Songs from {b_place}"]}}
+          - {name: CDs, noun: CD, price: [7, 19], w: 0.5, tpl: ["{artist} - {album} (CD)"], pools: {artist: [The Northern Lights, Luna Park, Elena Voss, Midnight Harbour, Kosmos Trio], album: ["{b_adj} Days", "Live in {b_place}", "Greatest Hits"]}}
+          - {name: Blu-ray & DVD, noun: Blu-ray, price: [7, 29], w: 0.6, tpl: ["{book_title} (Blu-ray)", "{book_title} - Complete Series (DVD)"]}
+      - name: Stationery & Office
+        axes: []
+        style: generic
+        brands: stationery
+        own: 0.5
+        vat: std
+        children:
+          - {name: Notebooks & Journals, noun: Notebook, price: [3, 39], w: 1.5, season: school, tags: [school, gift], tpl: ["{brand} A5 Dotted {noun} Hardcover", "{brand} Leather Journal", "{brand} Spiral {noun} (5 Pack)"]}
+          - {name: Pens & Pencils, noun: Gel Pens (10 Pack), price: [2, 49], w: 1.5, season: school, tags: [school], repeat: 90}
+          - {name: School Supplies, noun: Pencil Case Set, price: [2, 39], w: 2, season: school, tags: [school], tpl: ["{brand} {noun}", "{brand} Colouring Pencils (24)", "{brand} Geometry Set", "{brand} Exercise Books (10 Pack)", "{brand} Scientific Calculator"]}
+          - {name: Office Paper, noun: Copy Paper A4 (500 Sheets), price: [4, 39], w: 1, repeat: 60, qty: 5, kg: 2.5}
+          - {name: Calendars & Planners, noun: 2027 Weekly Planner, price: [5, 29], w: 0.8, season: calendar, tags: [gift]}
+          - {name: Desk Organisers, noun: Desk Organiser, price: [5, 49], w: 0.6}
+
+  - name: Automotive
+    w: 2
+    style: auto
+    brands: auto
+    ret: 0.06
+    own: 0.35
+    life: consumer
+    dens: 0.6
+    kg: 2
+    children:
+      - name: Car Parts & Accessories
+        children:
+          - {name: Winter Tyres, noun: Winter Tyre, price: [49, 299], axes: [tyre_size], w: 2, season: tyres_winter, tags: [cold], kg: 9, brands: tyres, tpl: ["{brand} {tyre_line} {noun}", "{brand} {auto_line} {noun}"], pools: {tyre_line: [Snowgrip 5, Alpin Pro, WinterContact X, IceMaster 3, Nordic Grip]}, qty: 4}
+          - {name: Summer Tyres, noun: Summer Tyre, price: [45, 279], axes: [tyre_size], w: 2, season: tyres_summer, kg: 9, brands: tyres, tpl: ["{brand} {tyre_line} {noun}", "{brand} {auto_line} {noun}"], pools: {tyre_line: [SportMax 6, EcoDrive, Primacy Plus, Road Master, Premium Contact]}, qty: 4}
+          - {name: Car Batteries, noun: Car Battery, price: [59, 229], w: 1, season: winter_mild, kg: 18, tpl: ["{brand} {ah} Ah {noun} AGM", "{brand} {ah} Ah Start-Stop {noun}"], pools: {ah: ["60", "70", "80", "95"]}}
+          - {name: Motor Oil, noun: Motor Oil 5W-30, price: [19, 69], w: 1, repeat: 180, tpl: ["{brand} {noun} 5 l", "{brand} Motor Oil 0W-20 5 l", "{brand} Motor Oil 5W-40 4 l"]}
+          - {name: Wiper Blades, noun: Wiper Blades, price: [9, 49], w: 0.8, season: autumn, repeat: 365}
+          - {name: Dash Cams, noun: Dash Cam, price: [39, 299], w: 1, style: tech, life: tech, brands: tech}
+          - {name: Car Phone Holders & Chargers, noun: Car Phone Holder, price: [7, 49], w: 1.2, style: generic}
+          - {name: Car Care, noun: Car Wash Kit, price: [5, 99], w: 1, season: garden, tpl: ["{brand} {noun}", "{brand} Ceramic Wax 500 ml", "{brand} Microfibre Cloths (12 Pack)", "{brand} Interior Cleaner", "{brand} Snow Brush & Ice Scraper"]}
+          - {name: Roof Boxes & Racks, noun: Roof Box 420 l, price: [99, 799], w: 0.5, season: summer, kg: 15}
+      - name: Motorcycle
+        children:
+          - {name: Motorcycle Helmets, noun: Full-Face Helmet, price: [79, 599], axes: [helmet_size], w: 0.6, brands: moto}
+          - {name: Motorcycle Gear, noun: Motorcycle Gloves, price: [19, 299], axes: [size_apparel], w: 0.5, brands: moto, ret: 0.18}
+
+  - name: Jewellery & Watches
+    w: 2
+    style: jewellery
+    brands: jewellery
+    ret: 0.12
+    own: 0.2
+    life: fashion
+    dens: 1
+    kg: 0.1
+    season: gifting
+    tags: [gift, valentine]
+    children:
+      - name: Watches
+        brands: watches
+        style: generic
+        children:
+          - {name: Men's Watches, noun: Men's Watch, price: [29, 1499], w: 2, tpl: ["{brand} {watch_line} Automatic {noun}", "{brand} {watch_line} Chronograph {noun}", "{brand} {watch_line} Quartz {noun}"], pools: {watch_line: [Mariner, Heritage, Pilot, Diver 300, Classic, Field, Moonphase]}}
+          - {name: Women's Watches, noun: Women's Watch, price: [29, 999], w: 1.5, tpl: ["{brand} {watch_line} {noun}", "{brand} {watch_line} Mesh Strap {noun}"], pools: {watch_line: [Petite, Classic, Rose, Elegance, Minimal, Crystal]}}
+      - name: Jewellery
+        children:
+          - {name: Necklaces, noun: Necklace, price: [15, 899], w: 2}
+          - {name: Earrings, noun: Earrings, price: [12, 599], w: 2}
+          - {name: Rings, noun: Ring, price: [15, 1499], axes: [ring_size], w: 1.5, ret: 0.18}
+          - {name: Bracelets, noun: Bracelet, price: [12, 699], w: 1.5}

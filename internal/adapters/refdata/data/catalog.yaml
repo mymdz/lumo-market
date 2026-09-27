@@ -1,0 +1,178 @@
+# Global building blocks for the product catalog.
+# Templates use {placeholders}: {brand}, {noun}, {gen} (model generation number),
+# {model} (model code like "KX450"), {num} (small number), {author},
+# or the name of any pool (leaf pools > department pools > global pools).
+# Pool values may contain placeholders themselves.
+
+styles:
+  tech:
+    - "{brand} {tech_line} {gen}{tech_suffix} {noun}"
+    - "{brand} {tech_line}{tech_suffix} {noun}"
+    - "{brand} {model} {noun}"
+  appliance:
+    - "{brand} {appl_line} {noun} {model}"
+    - "{brand} {noun} {model}"
+    - "{brand} {appl_line} {noun}"
+  fashion:
+    - "{brand} {fit} {material} {noun}"
+    - "{brand} {fit} {noun}"
+    - "{brand} {collection_f} {material} {noun}"
+    - "{brand} {material} {noun}"
+  shoes:
+    - "{brand} {shoe_line} {noun}"
+    - "{brand} {shoe_line} {shoe_mat} {noun}"
+    - "{brand} {shoe_mat} {noun}"
+  home:
+    - "{brand} {home_coll} {noun}"
+    - "{brand} {home_coll} {material_home} {noun}"
+    - "{brand} {material_home} {noun}"
+  furniture:
+    - "{brand} {home_coll} {noun}, {material_home}"
+    - "{brand} {home_coll} {noun}"
+  beauty:
+    - "{brand} {beauty_line} {noun}"
+    - "{brand} {beauty_ing} {noun}"
+  grocery:
+    - "{brand} {variety} {noun}"
+    - "{brand} {noun}, {variety}"
+  generic:
+    - "{brand} {noun}"
+    - "{brand} {generic_adj} {noun}"
+    - "{brand} {generic_adj} {noun} {model}"
+  toy:
+    - "{brand} {toy_theme} {noun}"
+    - "{brand} {noun} {toy_theme}"
+  tool:
+    - "{brand} {tool_volt} {noun} {model}"
+    - "{brand} {noun} {model}"
+  book:
+    - "{book_title}"
+  jewellery:
+    - "{brand} {jewel_style} {jewel_mat} {noun}"
+    - "{brand} {jewel_mat} {noun}"
+  sport:
+    - "{brand} {sport_line} {noun}"
+    - "{brand} {sport_line} {gen} {noun}"
+  auto:
+    - "{brand} {noun} {model}"
+    - "{brand} {auto_line} {noun}"
+
+pools:
+  tech_line: [Nova, Aero, Pulse, Vertex, Orbit, Flux, Zen, Apex, Nimbus, Echo, Prism, Titan, Volt, Aura, Spark, Quantum, Edge, Core, Wave, Neo, Stellar, Vista, Halo, Arc, Lumen, Onyx, Rift, Sigma]
+  tech_suffix: ["", "", "", "", "", " Pro", " Pro", " Max", " Lite", " Plus", " Ultra", " Mini", " SE", " X", " Air"]
+  appl_line: [Series 4, Series 6, Series 8, Comfort, Pure, Smart, Eco, Perfect, Classic, Signature, Pro, Essential, Excel, Silence, Vita, Avanti, Maestro]
+  fit: [Slim Fit, Regular Fit, Relaxed, Oversized, Classic, Cropped, Straight, Tapered, Essential, Everyday, Lightweight, Soft-Touch, Boxy, Fitted, Loose Fit]
+  material: [Cotton, Organic Cotton, Linen, Wool-Blend, Merino, Recycled, Cashmere-Blend, Viscose, Jersey, Corduroy, Fleece, Satin, Ribbed, Twill, Poplin, Seersucker, Modal, Tencel]
+  collection_f: [Riviera, Soho, Montmartre, Brera, Chelsea, Kreuzberg, Jordaan, Malasaña, Nørrebro, Södermalm, Trastevere, Alfama, Prado, Camden, Marais, Ixelles, Neubau]
+  shoe_line: [Runner, Classic, Court, Urban, Trail, Street, Retro, Cloud, Glide, Terra, Metro, Loafer, Chelsea, Derby, Nomad, Aero]
+  shoe_mat: [Leather, Suede, Canvas, Knit, Mesh, Vegan Leather, Nubuck, Recycled]
+  home_coll: [Oslo, Bergen, Malmö, Aarhus, Turku, Visby, Lund, Uppsala, Odense, Tromsø, Gotland, Helsinki, Skagen, Kalmar, Lofoten, Fjällbo, Västerås, Roskilde, Ålesund, Porvoo, Siena, Lucca, Ravenna, Toledo, Sintra, Brugge, Delft, Annecy]
+  material_home: [Oak, Walnut, Pine, Velvet, Linen, Bouclé, Rattan, Marble-Effect, Metal, Bamboo, Cotton, Stoneware, Ceramic, Glass, Acacia, Jute, Teak]
+  beauty_line: [Hydra Boost, Pure Glow, Age Defy, Clear Skin, Velvet Touch, Radiance, Nude Glow, Deep Repair, Aqua Fresh, Silk Therapy, Vital C, Retinol Night, Calm & Soothe, Bright Eyes, Matte Perfect, Dewy Skin, Barrier Care]
+  beauty_ing: [Hyaluronic, Vitamin C, Niacinamide, Retinol, Ceramide, Aloe Vera, Argan Oil, Shea Butter, Collagen, Green Tea, Rosehip, Squalane, Peptide, Charcoal, Coconut]
+  generic_adj: [Premium, Compact, Classic, Deluxe, Essential, Heavy-Duty, Portable, Eco, Professional, Foldable, Adjustable, Lightweight, Universal, Multi-Purpose]
+  toy_theme: [Space Explorer, Jungle Adventure, Pirate Cove, Dino World, Fairy Garden, City Rescue, Ocean Quest, Castle Kingdom, Racing Team, Robot Lab, Farm Friends, Magic Academy, Arctic Expedition, Candy Land, Safari Park, Starship, Volcano Island, Fire Station]
+  tool_volt: [12V, 18V, 18V Brushless, 20V Max, 36V, 18V Compact]
+  sport_line: [Pro, Elite, Race, Trail, Aero, Flex, Core, Summit, Glide, Pace, Strike, Endure, Tempo, Vento]
+  jewel_style: [Classic, Minimalist, Vintage, Twisted, Solitaire, Infinity, Heart, Pavé, Halo, Braided, Celestial, Floral]
+  jewel_mat: [Sterling Silver, 14k Gold, 18k Gold-Plated, Rose Gold, Stainless Steel, White Gold, Titanium]
+  auto_line: [Premium, Pro, Eco, All-Season, Performance, Comfort, Max]
+  variety: [Classic, Original, Organic, Extra, Intense, Mild, Premium, Bio, Traditional, Signature, Family Size, Light]
+  # books
+  book_title:
+    - "The {b_adj} {b_noun}"
+    - "The {b_noun} of {b_place}"
+    - "A {b_noun} in {b_place}"
+    - "The Last {b_noun}"
+    - "Beneath the {b_sky}"
+    - "The {b_person}'s {b_noun}"
+    - "{b_place} Nights"
+    - "When the {b_sky} Falls"
+    - "The Secret of {b_place}"
+    - "Letters from {b_place}"
+    - "The {b_adj} Year"
+    - "All the {b_adj} {b_noun}s"
+    - "{b_noun} and {b_noun2}"
+  b_adj: [Silent, Hidden, Forgotten, Burning, Golden, Broken, Midnight, Crimson, Quiet, Lost, Winter, Paper, Glass, Summer, Salt, Wild, Borrowed, Distant, Hollow, Bright]
+  b_noun: [Harbour, Garden, Daughter, Promise, House, Orchard, River, Lighthouse, Map, Letter, Island, Violin, Clockmaker, Bridge, Widow, Keeper, Tide, Shadow, Voyage, Station]
+  b_noun2: [Salt, Ashes, Honey, Iron, Smoke, Roses, Thunder, Silk, Stone, Wine]
+  b_place: [Lisbon, Vienna, Kraków, Bruges, Seville, Trieste, Riga, Porto, Salzburg, Ghent, Valletta, Chișinău, Tallinn, Bergen, Palermo, Toledo, Lyon, Delft]
+  b_sky: [Northern Sky, Autumn Moon, Last Snow, Red Horizon, Silver Stars, Summer Rain]
+  b_person: [Watchmaker, Beekeeper, Cartographer, Botanist, Bookseller, Ferryman, Glassblower, Translator, Painter, Baker]
+
+seasons:
+  flat:        [1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00]
+  summer:      [0.35, 0.40, 0.60, 0.90, 1.40, 2.00, 2.30, 1.90, 1.00, 0.55, 0.35, 0.35]
+  summer_mild: [0.70, 0.70, 0.85, 1.00, 1.20, 1.35, 1.40, 1.30, 1.05, 0.85, 0.75, 0.80]
+  winter:      [2.00, 1.60, 1.00, 0.60, 0.35, 0.25, 0.25, 0.35, 0.75, 1.40, 2.00, 2.20]
+  winter_mild: [1.35, 1.20, 1.00, 0.85, 0.75, 0.70, 0.70, 0.75, 0.95, 1.15, 1.30, 1.35]
+  garden:      [0.30, 0.50, 1.30, 2.20, 2.30, 1.80, 1.30, 0.90, 0.70, 0.50, 0.30, 0.30]
+  autumn:      [0.80, 0.70, 0.80, 0.90, 0.90, 0.90, 0.90, 1.00, 1.30, 1.50, 1.30, 1.00]
+  ski:         [2.20, 1.80, 0.80, 0.30, 0.10, 0.10, 0.10, 0.20, 0.50, 1.20, 2.40, 2.80]
+  xmas:        [0.30, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.30, 0.70, 1.60, 4.00, 5.50]
+  gifting:     [0.80, 0.90, 0.90, 0.90, 0.90, 0.85, 0.85, 0.85, 0.90, 1.00, 1.50, 2.20]
+  school:      [0.80, 0.60, 0.60, 0.60, 0.60, 0.70, 1.00, 2.60, 2.00, 0.80, 0.70, 0.80]
+  fitness:     [2.00, 1.40, 1.10, 1.00, 0.90, 0.80, 0.80, 0.80, 1.00, 1.00, 1.00, 0.90]
+  tyres_winter: [0.60, 0.30, 0.20, 0.10, 0.10, 0.10, 0.10, 0.20, 0.80, 3.00, 3.50, 1.50]
+  tyres_summer: [0.20, 0.50, 2.50, 3.50, 1.50, 0.60, 0.40, 0.30, 0.30, 0.20, 0.20, 0.20]
+  costume:     [0.30, 1.60, 0.40, 0.30, 0.30, 0.30, 0.30, 0.40, 1.00, 5.00, 0.40, 0.60]
+  cooling:     [0.10, 0.10, 0.20, 0.40, 1.00, 2.80, 3.50, 2.50, 0.60, 0.10, 0.10, 0.10]
+  heating:     [2.40, 1.80, 1.00, 0.50, 0.20, 0.10, 0.10, 0.20, 0.60, 1.50, 2.30, 2.60]
+  calendar:    [2.50, 0.80, 0.30, 0.20, 0.20, 0.20, 0.20, 0.30, 0.60, 1.20, 2.20, 3.50]
+  valentine:   [1.10, 2.00, 0.90, 0.90, 1.10, 0.90, 0.85, 0.85, 0.90, 0.95, 1.30, 2.00]
+  easter:      [0.70, 0.90, 1.40, 1.50, 0.80, 0.70, 0.70, 0.70, 0.80, 1.00, 1.50, 2.30]
+  bbq:         [0.20, 0.30, 0.60, 1.20, 1.90, 2.20, 2.20, 1.70, 0.90, 0.40, 0.20, 0.20]
+
+lifecycles:
+  tech:      {ramp: 21, plateau: 240, decay: 160, floor: 0.04}
+  fashion:   {ramp: 14, plateau: 75,  decay: 90,  floor: 0.03}
+  evergreen: {ramp: 30, plateau: 5000, decay: 2000, floor: 0.30}
+  book:      {ramp: 7,  plateau: 45,  decay: 200, floor: 0.12}
+  home:      {ramp: 30, plateau: 420, decay: 360, floor: 0.08}
+  toy:       {ramp: 20, plateau: 300, decay: 200, floor: 0.06}
+  consumer:  {ramp: 25, plateau: 600, decay: 400, floor: 0.10}
+
+axes:
+  size_apparel: {values: [XS, S, M, L, XL, XXL], weights: [6, 17, 28, 25, 16, 8]}
+  size_women:   {values: ["34", "36", "38", "40", "42", "44", "46"], weights: [6, 14, 24, 24, 17, 10, 5]}
+  size_jeans_w: {values: [W25, W26, W27, W28, W29, W30, W31, W32], weights: [5, 10, 15, 18, 18, 14, 10, 10]}
+  size_jeans_m: {values: [W28, W29, W30, W31, W32, W33, W34, W36, W38], weights: [4, 6, 12, 14, 18, 14, 14, 11, 7]}
+  size_suit:    {values: ["46", "48", "50", "52", "54", "56"], weights: [8, 16, 24, 24, 17, 11]}
+  shoe_w:       {values: ["36", "37", "38", "39", "40", "41", "42"], weights: [6, 12, 20, 24, 20, 12, 6]}
+  shoe_m:       {values: ["40", "41", "42", "43", "44", "45", "46"], weights: [5, 10, 18, 24, 22, 14, 7]}
+  shoe_k:       {values: ["24", "26", "28", "30", "32", "34", "36"], weights: [12, 15, 16, 16, 15, 14, 12]}
+  size_kids:    {values: ["98/104", "110/116", "122/128", "134/140", "146/152", "158/164"], weights: [18, 20, 19, 17, 14, 12]}
+  size_baby:    {values: ["50/56", "62/68", "74/80", "86/92"], weights: [20, 28, 28, 24]}
+  diaper_size:  {values: ["Size 1 (2-5 kg)", "Size 2 (3-6 kg)", "Size 3 (4-9 kg)", "Size 4 (7-18 kg)", "Size 5 (11-25 kg)", "Size 6 (15+ kg)"], weights: [8, 14, 22, 26, 20, 10]}
+  color_fashion: {values: [Black, White, Navy, Grey Melange, Beige, Olive, Burgundy, Light Blue, Camel, Khaki, Cream, Forest Green, Rust, Dusty Pink, Charcoal, Sand], weights: [22, 14, 12, 8, 7, 5, 4, 5, 4, 3, 5, 3, 2, 3, 3, 3], pick: [1, 4]}
+  color_tech:   {values: [Black, White, Silver, Graphite, Midnight Blue, Sage Green, Lavender, Titanium Grey, Rose Gold], weights: [34, 16, 12, 10, 8, 5, 4, 7, 4], pick: [1, 3]}
+  color_home:   {values: [White, Natural Oak, Walnut, Anthracite, Light Grey, Sage, Terracotta, Navy, Mustard, Beige, Black], weights: [18, 14, 8, 10, 12, 7, 5, 5, 4, 10, 7], pick: [1, 3]}
+  color_basic:  {values: [Black, White, Grey, Blue, Red, Green], weights: [30, 18, 15, 17, 10, 10], pick: [1, 3]}
+  storage_phone: {values: [128 GB, 256 GB, 512 GB, 1 TB], weights: [34, 42, 18, 6], price: [1.0, 1.12, 1.35, 1.7], pick: [2, 4]}
+  storage_tablet: {values: [64 GB, 128 GB, 256 GB, 512 GB], weights: [30, 38, 22, 10], price: [1.0, 1.15, 1.35, 1.7], pick: [2, 4]}
+  storage_ssd:  {values: [500 GB, 1 TB, 2 TB, 4 TB], weights: [25, 42, 25, 8], price: [1.0, 1.6, 2.8, 5.2], pick: [2, 4]}
+  ram_kit:      {values: [16 GB (2x8 GB), 32 GB (2x16 GB), 64 GB (2x32 GB)], weights: [40, 45, 15], price: [1.0, 1.8, 3.4], pick: [2, 3]}
+  laptop_cfg:   {values: [8 GB / 256 GB, 16 GB / 512 GB, 32 GB / 1 TB], weights: [25, 55, 20], price: [1.0, 1.25, 1.65], pick: [1, 3]}
+  tv_size:      {values: ['43"', '50"', '55"', '65"', '75"', '85"'], weights: [14, 18, 26, 26, 11, 5], price: [1.0, 1.2, 1.4, 1.9, 2.8, 4.2], pick: [2, 5]}
+  monitor_size: {values: ['24"', '27"', '32"', '34"'], weights: [30, 42, 18, 10], price: [1.0, 1.3, 1.7, 2.0], pick: [1, 2]}
+  mattress:     {values: [90x200 cm, 140x200 cm, 160x200 cm, 180x200 cm], weights: [22, 28, 30, 20], price: [1.0, 1.45, 1.6, 1.8]}
+  bed_linen:    {values: [135x200 cm, 155x220 cm, 200x200 cm, 240x220 cm], weights: [34, 28, 22, 16], price: [1.0, 1.2, 1.4, 1.6]}
+  rug_size:     {values: [80x150 cm, 120x170 cm, 160x230 cm, 200x290 cm], weights: [26, 30, 30, 14], price: [1.0, 1.7, 2.8, 4.2], pick: [2, 4]}
+  beauty_ml:    {values: [30 ml, 50 ml, 100 ml], weights: [40, 40, 20], price: [1.0, 1.4, 2.2], pick: [1, 2]}
+  perfume_ml:   {values: [30 ml, 50 ml, 100 ml], weights: [26, 42, 32], price: [1.0, 1.45, 2.1], pick: [2, 3]}
+  pack:         {values: [1 Pack, 3 Pack, 6 Pack], weights: [55, 30, 15], price: [1.0, 2.7, 5.0], pick: [1, 3]}
+  food_weight:  {values: [250 g, 500 g, 1 kg], weights: [30, 40, 30], price: [1.0, 1.8, 3.3], pick: [1, 3]}
+  capsules:     {values: [10 Capsules, 30 Capsules, 100 Capsules], weights: [40, 40, 20], price: [1.0, 2.8, 8.5], pick: [1, 3]}
+  petfood:      {values: [2 kg, 7 kg, 12 kg], weights: [35, 35, 30], price: [1.0, 2.8, 4.3], pick: [2, 3]}
+  book_format:  {values: [Paperback, Hardcover], weights: [70, 30], price: [1.0, 1.7], pick: [1, 2]}
+  ring_size:    {values: ["50", "52", "54", "56", "58", "60"], weights: [10, 18, 24, 22, 16, 10]}
+  tyre_size:    {values: [195/65 R15, 205/55 R16, 225/45 R17, 225/40 R18, 235/55 R19], weights: [20, 30, 25, 14, 11], price: [1.0, 1.1, 1.3, 1.5, 1.8], pick: [2, 5]}
+  bike_frame:   {values: [S, M, L, XL], weights: [18, 34, 32, 16]}
+  ski_length:   {values: [150 cm, 160 cm, 170 cm, 180 cm], weights: [20, 32, 30, 18]}
+  battery_ah:   {values: [2.0 Ah, 4.0 Ah, 5.0 Ah], weights: [30, 45, 25], price: [1.0, 1.5, 1.8], pick: [1, 3]}
+  paint_vol:    {values: [1 l, 2.5 l, 5 l, 10 l], weights: [22, 34, 30, 14], price: [1.0, 2.1, 3.6, 6.5], pick: [2, 4]}
+  pet_size:     {values: [S, M, L, XL], weights: [25, 35, 27, 13], price: [1.0, 1.3, 1.6, 2.0], pick: [2, 4]}
+  helmet_size:  {values: [S, M, L], weights: [28, 44, 28]}
+  phone_fit:    {values: [Nova 14, Nova 14 Pro, Nova 15, Nova 15 Pro, Aero 9, Pulse X3, Vertex 12, Titan 7 Ultra], weights: [16, 14, 18, 16, 10, 9, 9, 8], pick: [2, 5]}
+  size_bra:     {values: [70B, 75B, 75C, 80B, 80C, 85C, 85D], weights: [10, 16, 18, 16, 16, 13, 11]}
+  wine_pack:    {values: [1 Bottle, 3 Bottles, 6 Bottles], weights: [55, 25, 20], price: [1.0, 2.85, 5.4], pick: [1, 3]}

@@ -1,0 +1,151 @@
+# Names and address formats per language.
+# street_fmt tokens: {street} {num} {apt} {letter} {floor}
+langs:
+  de:
+    male: [Lukas, Leon, Finn, Jonas, Paul, Felix, Maximilian, Elias, Noah, Ben, Luca, Tim, Jan, Niklas, Moritz, Tobias, Florian, Sebastian, Alexander, Michael, Thomas, Andreas, Stefan, Markus, Christian, Daniel, Matthias, Frank, Jürgen, Wolfgang, Klaus, Uwe, Dieter, Peter, Martin]
+    female: [Emma, Mia, Hannah, Sophia, Lena, Lea, Anna, Marie, Laura, Julia, Lisa, Sarah, Katharina, Johanna, Clara, Emilia, Charlotte, Nina, Sabine, Petra, Claudia, Susanne, Andrea, Stefanie, Nicole, Anja, Birgit, Monika, Ursula, Heike, Karin, Christina, Jana, Franziska, Theresa]
+    last: [Müller, Schmidt, Schneider, Fischer, Weber, Meyer, Wagner, Becker, Schulz, Hoffmann, Schäfer, Koch, Bauer, Richter, Klein, Wolf, Schröder, Neumann, Schwarz, Zimmermann, Braun, Krüger, Hofmann, Hartmann, Lange, Schmitt, Werner, Schmitz, Krause, Meier, Lehmann, Schmid, Schulze, Maier, Köhler, Herrmann, König, Walter, Mayer, Huber, Kaiser, Fuchs, Peters, Lang, Scholz, Möller, Weiß, Jung, Hahn, Vogel, Friedrich, Keller, Günther, Frank, Berger, Winkler, Roth, Beck, Lorenz, Baumann]
+    streets: [Hauptstraße, Bahnhofstraße, Schulstraße, Gartenstraße, Dorfstraße, Bergstraße, Lindenstraße, Kirchstraße, Waldstraße, Ringstraße, Goethestraße, Schillerstraße, Mozartstraße, Friedrichstraße, Birkenweg, Am Markt, Rosenweg, Mühlenweg, Parkstraße, Feldstraße, Wiesenstraße, Blumenstraße, Kastanienallee, Eichendorffstraße, Beethovenstraße, Lessingstraße, Poststraße, Marktplatz, Talstraße, Sonnenstraße, Buchenweg, Ahornweg, Uhlandstraße, Kantstraße, Am Hang]
+    street_fmt: ["{street} {num}", "{street} {num}", "{street} {num}{letter}"]
+    line2_fmt: ["c/o {name}", "Hinterhaus", "{floor}. OG", "App. {apt}"]
+    line2_prob: 0.07
+  fr:
+    male: [Lucas, Hugo, Louis, Gabriel, Arthur, Jules, Nathan, Léo, Raphaël, Adam, Thomas, Nicolas, Julien, Pierre, Antoine, Alexandre, Maxime, Romain, Mathieu, Guillaume, Olivier, Philippe, Laurent, Christophe, Stéphane, Sébastien, Frédéric, Éric, Patrick, Alain, Jean, Michel, François, Benoît, Yannick]
+    female: [Emma, Jade, Louise, Alice, Chloé, Léa, Manon, Camille, Inès, Sarah, Julie, Marie, Laura, Pauline, Mathilde, Claire, Élodie, Céline, Aurélie, Nathalie, Isabelle, Sophie, Sandrine, Stéphanie, Valérie, Christine, Catherine, Anne, Martine, Sylvie, Margaux, Juliette, Lucie, Océane, Charlotte]
+    last: [Martin, Bernard, Dubois, Thomas, Robert, Richard, Petit, Durand, Leroy, Moreau, Simon, Laurent, Lefebvre, Michel, Garcia, David, Bertrand, Roux, Vincent, Fournier, Morel, Girard, André, Lefèvre, Mercier, Dupont, Lambert, Bonnet, François, Martinez, Legrand, Garnier, Faure, Rousseau, Blanc, Guerin, Muller, Henry, Roussel, Nicolas, Perrin, Morin, Mathieu, Clément, Gauthier, Dumont, Lopez, Fontaine, Chevalier, Robin]
+    streets: [rue de la République, rue Victor Hugo, avenue Jean Jaurès, boulevard Voltaire, rue Pasteur, rue de la Gare, place de l'Église, rue du Moulin, chemin des Vignes, rue des Écoles, avenue de la Libération, rue Gambetta, rue Nationale, rue du Général de Gaulle, allée des Tilleuls, rue des Lilas, impasse des Roses, rue Saint-Michel, rue de Paris, boulevard Carnot, rue Émile Zola, avenue Foch, rue des Acacias, rue du Château, quai des Chartrons]
+    street_fmt: ["{num} {street}", "{num} {street}", "{num} bis {street}"]
+    line2_fmt: ["Appt {apt}", "Bât. {letter}", "Résidence Les Pins, Appt {apt}", "{floor}e étage"]
+    line2_prob: 0.22
+  nl:
+    male: [Daan, Sem, Lucas, Levi, Finn, Milan, Bram, Luuk, Jesse, Thijs, Lars, Ruben, Tim, Niels, Jeroen, Sander, Bas, Martijn, Dennis, Mark, Peter, Jan, Kees, Willem, Pieter, Joost, Stijn, Koen, Thomas, Wouter, Bart, Maarten, Hendrik, Gert, Rik]
+    female: [Emma, Julia, Tess, Sophie, Zoë, Mila, Sara, Fenna, Lotte, Anna, Eva, Lisa, Sanne, Femke, Iris, Anouk, Laura, Marloes, Esther, Linda, Kim, Ilse, Manon, Maaike, Els, Ingrid, Marieke, Annemiek, Nienke, Roos, Floor, Noor, Evi, Lieke, Charlotte]
+    last: [de Jong, Jansen, de Vries, van den Berg, van Dijk, Bakker, Janssen, Visser, Smit, Meijer, de Boer, Mulder, de Groot, Bos, Vos, Peters, Hendriks, van Leeuwen, Dekker, Brouwer, de Wit, Dijkstra, Smits, de Graaf, van der Meer, van der Linden, Kok, Jacobs, de Haan, Vermeulen, van den Heuvel, van der Veen, van den Broek, de Bruijn, de Bruin, van der Heijden, Schouten, van Beek, Willems, van Wijk, Peeters, Maes, Claes, Goossens, Wouters]
+    streets: [Kerkstraat, Dorpsstraat, Molenweg, Schoolstraat, Stationsweg, Julianastraat, Beatrixstraat, Wilhelminastraat, Nieuwstraat, Markt, Hoofdstraat, Kastanjelaan, Eikenlaan, Parallelweg, Lindelaan, Prinses Irenestraat, Oranjestraat, Industrieweg, Sportlaan, Groenstraat, Veldstraat, Brugstraat, Kloosterstraat, Nieuwe Gracht, Havenstraat]
+    street_fmt: ["{street} {num}", "{street} {num}", "{street} {num}{letter}", "{street} {num}-{apt}"]
+    line2_fmt: ["bus {apt}", "{floor}e verdieping"]
+    line2_prob: 0.05
+  it:
+    male: [Leonardo, Francesco, Alessandro, Lorenzo, Mattia, Andrea, Gabriele, Riccardo, Tommaso, Edoardo, Marco, Luca, Giuseppe, Giovanni, Antonio, Roberto, Stefano, Paolo, Davide, Simone, Federico, Matteo, Salvatore, Vincenzo, Massimo, Fabio, Claudio, Enrico, Daniele, Pietro, Giorgio, Sergio, Franco, Alberto, Emanuele]
+    female: [Sofia, Giulia, Aurora, Alice, Ginevra, Emma, Giorgia, Beatrice, Martina, Chiara, Francesca, Sara, Valentina, Elena, Alessia, Federica, Silvia, Laura, Paola, Anna, Maria, Roberta, Elisa, Serena, Barbara, Cristina, Monica, Daniela, Simona, Angela, Rosa, Ilaria, Camilla, Noemi, Arianna]
+    last: [Rossi, Russo, Ferrari, Esposito, Bianchi, Romano, Colombo, Ricci, Marino, Greco, Bruno, Gallo, Conti, De Luca, Mancini, Costa, Giordano, Rizzo, Lombardi, Moretti, Barbieri, Fontana, Santoro, Mariani, Rinaldi, Caruso, Ferrara, Galli, Martini, Leone, Longo, Gentile, Martinelli, Vitale, Lombardo, Serra, Coppola, De Santis, D'Angelo, Marchetti, Parisi, Villa, Conte, Ferraro, Ferri, Fabbri, Bianco, Marini, Grasso, Valentini]
+    streets: [Via Roma, Via Garibaldi, Via Mazzini, Via Dante Alighieri, Corso Italia, Via Giuseppe Verdi, Piazza Matteotti, Via Cavour, Via Marconi, Via XX Settembre, Via della Repubblica, Viale Europa, Via San Francesco, Corso Vittorio Emanuele II, Via Milano, Via Kennedy, Via dei Mille, Via Leopardi, Via Manzoni, Via Nazionale, Via Aldo Moro, Viale della Libertà, Via Puccini, Via Carducci, Via Trieste]
+    street_fmt: ["{street} {num}", "{street}, {num}", "{street} {num}/{letter}"]
+    line2_fmt: ["Scala {letter}, Int. {apt}", "Piano {floor}", "Int. {apt}"]
+    line2_prob: 0.25
+  es:
+    male: [Hugo, Martín, Lucas, Mateo, Leo, Daniel, Alejandro, Pablo, Manuel, Álvaro, Adrián, David, Mario, Diego, Javier, Sergio, Carlos, Jorge, José, Antonio, Francisco, Juan, Miguel, Rafael, Pedro, Ángel, Fernando, Luis, Alberto, Raúl, Rubén, Iván, Óscar, Andrés, Jesús]
+    female: [Lucía, Sofía, Martina, María, Julia, Paula, Valeria, Emma, Daniela, Carla, Alba, Noa, Laura, Marta, Sara, Andrea, Ana, Elena, Cristina, Carmen, Isabel, Pilar, Rosa, Beatriz, Raquel, Silvia, Patricia, Irene, Nuria, Eva, Lorena, Natalia, Claudia, Inés, Rocío]
+    last: [García, Rodríguez, González, Fernández, López, Martínez, Sánchez, Pérez, Gómez, Martín, Jiménez, Ruiz, Hernández, Díaz, Moreno, Muñoz, Álvarez, Romero, Alonso, Gutiérrez, Navarro, Torres, Domínguez, Vázquez, Ramos, Gil, Ramírez, Serrano, Blanco, Molina, Morales, Suárez, Ortega, Delgado, Castro, Ortiz, Rubio, Marín, Sanz, Núñez, Iglesias, Medina, Garrido, Cortés, Castillo, Santos, Lozano, Guerrero, Cano, Prieto]
+    streets: [Calle Mayor, Calle Real, Avenida de la Constitución, Calle de Alcalá, Gran Vía, Plaza de España, Calle San Juan, Calle Nueva, Calle del Sol, Avenida de Andalucía, Calle de la Iglesia, Paseo de la Castellana, Calle Cervantes, Calle Goya, Avenida de América, Calle Serrano, Calle Toledo, Ronda de Valencia, Calle Ancha, Calle Colón, Carrer de Balmes, Carrer de Mallorca, Avinguda Diagonal, Calle Princesa, Calle Velázquez]
+    street_fmt: ["{street}, {num}", "{street}, {num}", "{street} {num}"]
+    line2_fmt: ["{floor}º {letter}", "{floor}º {apt}ª", "Esc. {letter}, {floor}º", "Bajo {letter}"]
+    line2_prob: 0.6
+  pt:
+    male: [João, Rodrigo, Francisco, Martim, Santiago, Tomás, Afonso, Duarte, Miguel, Guilherme, Pedro, Tiago, Diogo, Rui, Nuno, Ricardo, Paulo, Luís, Carlos, José, António, Manuel, Jorge, Fernando, Bruno, Hugo, André, Filipe, Vasco, Gonçalo]
+    female: [Maria, Leonor, Matilde, Beatriz, Carolina, Mariana, Ana, Inês, Sofia, Margarida, Joana, Rita, Catarina, Sara, Marta, Cláudia, Sónia, Patrícia, Filipa, Teresa, Helena, Isabel, Fernanda, Paula, Rosa, Luísa, Diana, Bárbara, Daniela, Raquel]
+    last: [Silva, Santos, Ferreira, Pereira, Oliveira, Costa, Rodrigues, Martins, Jesus, Sousa, Fernandes, Gonçalves, Gomes, Lopes, Marques, Alves, Almeida, Ribeiro, Pinto, Carvalho, Teixeira, Moreira, Correia, Mendes, Nunes, Soares, Vieira, Monteiro, Cardoso, Rocha, Raposo, Neves, Coelho, Cruz, Cunha, Pires, Ramos, Reis, Simões, Antunes]
+    streets: [Rua da Liberdade, Avenida da República, Rua de Santo António, Rua do Comércio, Rua Direita, Avenida 25 de Abril, Rua da Igreja, Largo do Rossio, Rua Augusta, Rua de Santa Catarina, Avenida dos Aliados, Rua Nova, Travessa do Carmo, Rua das Flores, Rua 5 de Outubro, Avenida da Boavista, Rua Garrett, Rua do Sol, Rua Almirante Reis, Rua Miguel Bombarda]
+    street_fmt: ["{street}, {num}", "{street} {num}"]
+    line2_fmt: ["{floor}º Esq.", "{floor}º Dto.", "{floor}º {letter}", "R/C"]
+    line2_prob: 0.55
+  en:
+    male: [Jack, James, Noah, Conor, Daniel, Seán, Michael, Patrick, Liam, Cian, Darragh, Adam, Luke, Oisín, Fionn, Ryan, Thomas, David, John, Kevin, Brian, Mark, Stephen, Paul, Declan, Eoin, Ciarán, Niall, Shane, Aidan]
+    female: [Grace, Emily, Fiadh, Sophie, Ava, Amelia, Lucy, Ellie, Chloe, Aoife, Sarah, Emma, Ciara, Niamh, Siobhán, Róisín, Orla, Mary, Catherine, Anne, Laura, Rachel, Katie, Hannah, Megan, Caoimhe, Clodagh, Sinéad, Deirdre, Maeve]
+    last: [Murphy, Kelly, O'Sullivan, Walsh, Smith, O'Brien, Byrne, Ryan, O'Connor, O'Neill, O'Reilly, Doyle, McCarthy, Gallagher, O'Doherty, Kennedy, Lynch, Murray, Quinn, Moore, McLoughlin, O'Carroll, Connolly, Daly, O'Connell, Wilson, Dunne, Brennan, Burke, Collins, Campbell, Clarke, Johnston, Hughes, O'Farrell, Fitzgerald, Brown, Martin, Maguire, Nolan]
+    streets: [Main Street, Church Road, Park Avenue, Green Lane, Mill Road, Station Road, Castle Street, Bridge Street, O'Connell Street, High Street, New Road, Sea View, Oak Park, Willow Grove, Grafton Street, Patrick Street, Abbey Street, College Green, Strand Road, Beech Lawn]
+    street_fmt: ["{num} {street}", "{num} {street}", "Apartment {apt}, {num} {street}"]
+    line2_fmt: ["Apartment {apt}", "The Courtyard", "Unit {apt}"]
+    line2_prob: 0.15
+  pl:
+    male: [Antoni, Jan, Aleksander, Franciszek, Jakub, Szymon, Filip, Mikołaj, Wojciech, Adam, Piotr, Krzysztof, Andrzej, Tomasz, Paweł, Michał, Marcin, Grzegorz, Łukasz, Mateusz, Kamil, Marek, Rafał, Dariusz, Jacek, Robert, Sebastian, Bartosz, Damian, Maciej]
+    female: [Zofia, Zuzanna, Hanna, Julia, Maja, Laura, Oliwia, Alicja, Lena, Maria, Anna, Katarzyna, Małgorzata, Agnieszka, Barbara, Ewa, Krystyna, Magdalena, Elżbieta, Joanna, Aleksandra, Monika, Natalia, Karolina, Marta, Beata, Dorota, Justyna, Paulina, Agata]
+    last: [Nowak, Kowalski, Wiśniewski, Wójcik, Kowalczyk, Kamiński, Lewandowski, Zieliński, Szymański, Woźniak, Dąbrowski, Kozłowski, Jankowski, Mazur, Kwiatkowski, Krawczyk, Kaczmarek, Piotrowski, Grabowski, Zając, Pawłowski, Michalski, Król, Wieczorek, Jabłoński, Wróbel, Nowakowski, Majewski, Olszewski, Stępień, Malinowski, Jaworski, Adamczyk, Dudek, Nowicki, Pawlak, Górski, Witkowski, Walczak, Sikora]
+    streets: [Polna, Leśna, Słoneczna, Krótka, Szkolna, Ogrodowa, Lipowa, Brzozowa, Łąkowa, Kwiatowa, Kościuszki, Mickiewicza, Sienkiewicza, Kościelna, Długa, Jana Pawła II, Piłsudskiego, Konopnickiej, Wojska Polskiego, 3 Maja, Marszałkowska, Kolejowa, Zielona, Parkowa, Słowackiego]
+    street_fmt: ["ul. {street} {num}", "ul. {street} {num}/{apt}", "ul. {street} {num}/{apt}", "{street} {num} m. {apt}"]
+    line2_fmt: []
+    line2_prob: 0
+  cs:
+    male: [Jakub, Jan, Tomáš, Adam, Matyáš, Vojtěch, Ondřej, Filip, Lukáš, Martin, Petr, Josef, Pavel, Jiří, Michal, David, Karel, Milan, Zdeněk, Jaroslav, Miroslav, František, Václav, Roman, Radek, Marek, Daniel, Aleš, Libor, Vladimír]
+    female: [Eliška, Anna, Adéla, Tereza, Sofie, Natálie, Karolína, Kristýna, Lucie, Jana, Marie, Eva, Hana, Petra, Lenka, Kateřina, Věra, Alena, Martina, Veronika, Michaela, Zuzana, Barbora, Markéta, Ivana, Monika, Simona, Klára, Dana, Pavla]
+    last: [Novák, Svoboda, Novotný, Dvořák, Černý, Procházka, Kučera, Veselý, Horák, Němec, Marek, Pospíšil, Pokorný, Hájek, Král, Jelínek, Růžička, Beneš, Fiala, Sedláček, Doležal, Zeman, Kolář, Navrátil, Čermák, Vaněk, Urban, Blažek, Kříž, Kovář]
+    streets: [Nádražní, Školní, Husova, Komenského, Palackého, Masarykova, Zahradní, Nová, Krátká, Polní, Lipová, Družstevní, Revoluční, Tyršova, Havlíčkova, Sokolská, Luční, Jiráskova, Smetanova, Dlouhá]
+    street_fmt: ["{street} {num}/{apt}", "{street} {num}"]
+    line2_fmt: []
+    line2_prob: 0
+  sv:
+    male: [William, Liam, Noah, Hugo, Lucas, Oliver, Elias, Adam, Alexander, Axel, Erik, Lars, Anders, Johan, Per, Karl, Mikael, Jonas, Magnus, Fredrik, Henrik, Daniel, Mattias, Andreas, Björn, Nils, Gustav, Olof, Stefan, Emil]
+    female: [Alice, Maja, Vera, Elsa, Astrid, Wilma, Ella, Freja, Alma, Saga, Anna, Eva, Maria, Karin, Kristina, Lena, Sara, Emma, Linnea, Ida, Johanna, Sofia, Elin, Malin, Camilla, Frida, Hanna, Ingrid, Birgitta, Helena]
+    last: [Andersson, Johansson, Karlsson, Nilsson, Eriksson, Larsson, Olsson, Persson, Svensson, Gustafsson, Pettersson, Jonsson, Jansson, Hansson, Bengtsson, Jönsson, Lindberg, Jakobsson, Magnusson, Lindström, Olofsson, Lindqvist, Lindgren, Berg, Axelsson, Bergström, Lundberg, Lind, Lundgren, Mattsson]
+    streets: [Storgatan, Drottninggatan, Kungsgatan, Skolgatan, Nygatan, Kyrkogatan, Parkvägen, Sveavägen, Järnvägsgatan, Tallvägen, Björkvägen, Ringvägen, Södra Vägen, Vasagatan, Strandvägen, Östra Hamngatan, Linnégatan, Industrigatan, Björkgatan, Allégatan]
+    street_fmt: ["{street} {num}", "{street} {num}{letter}"]
+    line2_fmt: ["lgh 1{apt}0{floor}", "c/o {name}"]
+    line2_prob: 0.25
+  da:
+    male: [William, Noah, Oscar, Lucas, Carl, Victor, Malthe, Emil, Alfred, Frederik, Mads, Rasmus, Mikkel, Anders, Søren, Jens, Niels, Lars, Peter, Morten, Henrik, Thomas, Kasper, Jesper, Christian, Martin, Jakob, Troels, Kristian, Nikolaj]
+    female: [Ida, Emma, Alma, Ella, Sofia, Freja, Clara, Karla, Anna, Laura, Mette, Hanne, Susanne, Lene, Camilla, Maria, Louise, Pernille, Signe, Julie, Cecilie, Katrine, Maja, Line, Rikke, Tina, Birgitte, Kirsten, Anne, Charlotte]
+    last: [Nielsen, Jensen, Hansen, Pedersen, Andersen, Christensen, Larsen, Sørensen, Rasmussen, Jørgensen, Petersen, Madsen, Kristensen, Olsen, Thomsen, Christiansen, Poulsen, Johansen, Møller, Mortensen, Knudsen, Jakobsen, Mikkelsen, Frederiksen, Lund, Holm, Schmidt, Eriksen, Kristiansen, Simonsen]
+    streets: [Vestergade, Østergade, Nørregade, Søndergade, Skolevej, Kirkevej, Møllevej, Stationsvej, Parkvej, Strandvejen, Birkevej, Bøgevej, Industrivej, Engvej, Havnegade, Algade, Torvet, Lærkevej, Fasanvej, Rosenvænget]
+    street_fmt: ["{street} {num}", "{street} {num}, {floor}. tv", "{street} {num}, {floor}. th", "{street} {num}{letter}"]
+    line2_fmt: []
+    line2_prob: 0
+  fi:
+    male: [Leo, Eino, Onni, Väinö, Elias, Oliver, Eeli, Noel, Leevi, Juho, Mikko, Matti, Jari, Timo, Juha, Antti, Pekka, Markku, Kari, Mika, Janne, Ville, Tuomas, Sami, Petri, Jussi, Lauri, Heikki, Aleksi, Teemu]
+    female: [Aino, Eevi, Olivia, Aada, Isla, Helmi, Sofia, Venla, Ellen, Lilja, Anna, Maria, Laura, Johanna, Sari, Tiina, Anne, Päivi, Minna, Riikka, Hanna, Katja, Elina, Heidi, Emilia, Noora, Satu, Tuula, Pirjo, Marja]
+    last: [Korhonen, Virtanen, Mäkinen, Nieminen, Mäkelä, Hämäläinen, Laine, Heikkinen, Koskinen, Järvinen, Lehtonen, Lehtinen, Saarinen, Salminen, Heinonen, Niemi, Heikkilä, Kinnunen, Salonen, Turunen, Salo, Laitinen, Tuominen, Rantanen, Karjalainen, Jokinen, Mattila, Savolainen, Lahtinen, Ahonen]
+    streets: [Kauppakatu, Rantatie, Koulukatu, Puistokatu, Mäntytie, Koivutie, Kirkkokatu, Asemakatu, Mannerheimintie, Aleksanterinkatu, Hämeenkatu, Satamakatu, Torikatu, Kalevankatu, Pihlajatie, Kuusitie, Vihertie, Järvenpääntie, Isokatu, Rautatienkatu]
+    street_fmt: ["{street} {num}", "{street} {num} {letter} {apt}", "{street} {num} as {apt}"]
+    line2_fmt: []
+    line2_prob: 0
+  ro:
+    male: [Ion, Vasile, Mihai, Andrei, Alexandru, Nicolae, Gheorghe, Dumitru, Sergiu, Victor, Vladimir, Dan, Adrian, Cristian, Igor, Vitalie, Iurie, Octavian, Radu, Petru, Valeriu, Maxim, Daniel, Eugeniu, Denis, Artur, Mircea, Ștefan, Constantin, Veaceslav, Radu, Sorin, Vlad, Cătălin, Gabriel, Ciprian, Lucian, Emil]
+    female: [Maria, Elena, Ana, Natalia, Tatiana, Olga, Cristina, Victoria, Irina, Svetlana, Ecaterina, Lilia, Galina, Doina, Aurelia, Mariana, Nadejda, Diana, Ludmila, Valentina, Adriana, Daniela, Alexandra, Corina, Iulia, Anastasia, Mihaela, Violeta, Rodica, Larisa, Mihaela, Oana, Raluca, Cristina, Gabriela, Laura, Simona, Anca]
+    last: [Rusu, Ceban, Ciobanu, Țurcanu, Lungu, Cojocaru, Popa, Munteanu, Rotari, Sârbu, Bivol, Moraru, Guțu, Cazacu, Botnari, Ursu, Roșca, Melnic, Balan, Croitoru, Plămădeală, Grosu, Cebotari, Constantinov, Cernei, Andronic, Stratan, Negru, Postolachi, Mocanu, Chiriac, Railean, Iordache, Vrabie, Onu, Radu, Tudor, Moldovan, Barbu, Nistor, Lungu, Florea, Oprea, Iordache, Matei, Neagu, Preda]
+    streets: [Ștefan cel Mare, Mihai Eminescu, Alexandru cel Bun, Dacia, Pușkin, Mitropolit Varlaam, Ismail, Columna, Bucuriei, Independenței, Decebal, Traian, Calea Ieșilor, Vasile Alecsandri, Mircea cel Bătrân, Ion Creangă, Alba Iulia, Grenoble, Kiev, Studenților]
+    street_fmt: ["str. {street} {num}, ap. {apt}", "str. {street} {num}", "bd. {street} {num}, ap. {apt}", "str. {street} {num}/{letter}, ap. {apt}"]
+    line2_fmt: ["bloc {letter}, scara {floor}"]
+    line2_prob: 0.05
+  ru:
+    male: [Sergey, Dmitry, Alexey, Andrey, Igor, Vladimir, Nikolay, Oleg, Pavel, Yuri, Maxim, Ivan, Roman, Evgeny, Denis, Artem, Vitaly, Viktor, Anton, Konstantin]
+    female: [Olga, Tatiana, Natalia, Elena, Irina, Svetlana, Anna, Yulia, Marina, Ekaterina, Galina, Ludmila, Oksana, Larisa, Nina, Alina, Anastasia, Kristina, Veronika, Daria]
+    last: [Ivanov, Petrov, Smirnov, Popov, Sokolov, Kuznetsov, Morozov, Volkov, Lebedev, Kozlov, Novikov, Pavlov, Semenov, Golubev, Vinogradov, Bogdanov, Vorobyov, Fedorov, Mikhailov, Belov, Tarasov, Belousov, Karpov, Zaitsev, Grigoriev]
+    streets: [Ștefan cel Mare, Pușkin, Dacia, Ismail, Columna, Decebal, Traian, Kiev, Studenților, Independenței]
+    street_fmt: ["str. {street} {num}, ap. {apt}", "str. {street} {num}"]
+    line2_fmt: []
+    line2_prob: 0
+
+# minority / international names mixed into every market (share = country intl);
+# the group is chosen per country (see app/people.go)
+intl_groups:
+  tr:
+    male: [Mehmet, Ahmet, Mustafa, Ali, Yusuf, Emre, Hasan, Murat, Can, Burak, Kerem, Deniz, Serkan, Onur, Tolga, Barış, Umut, Volkan, Kaan, Oğuz, Selim, Eren, Furkan, Hakan]
+    female: [Ayşe, Fatma, Zeynep, Elif, Emine, Merve, Selin, Büşra, Esra, Derya, Gül, Aylin, Ebru, Seda, Pınar, Tuğba, Hülya, Nur, Özlem, Yasemin, Deniz, Ceren]
+    last: [Yılmaz, Kaya, Demir, Şahin, Çelik, Öztürk, Aydın, Arslan, Doğan, Kılıç, Aslan, Koç, Yıldız, Özdemir, Aksoy, Polat, Erdem, Güneş, Kurt, Özkan, Şimşek, Yavuz, Tekin, Acar, Bulut, Karaca]
+  ar:
+    male: [Mohamed, Karim, Youssef, Omar, Rachid, Samir, Hassan, Bilal, Mehdi, Nabil, Tariq, Amine, Ayoub, Hamza, Anas, Khalid, Walid, Sofiane, Adel, Ilyas, Zakaria, Reda, Farid, Yassine]
+    female: [Fatima, Amina, Leila, Samira, Yasmin, Nour, Sara, Hiba, Mariam, Zahra, Salma, Imane, Khadija, Nadia, Soumaya, Lina, Asmae, Meryem, Rania, Dounia, Ines, Houda, Malika, Siham]
+    last: [Benali, El Amrani, Haddad, Mansouri, Bouzid, Belkacem, Cherif, Hamdi, Saidi, Ouali, Rahman, Hussein, Amrani, Benjelloun, Tazi, Alaoui, Idrissi, Zerrouki, Belhadj, Kaddour, Messaoudi, Boukhari, Laaroussi, Chaoui, Fassi, Naciri]
+  uk:
+    male: [Oleksandr, Andriy, Taras, Dmytro, Bohdan, Mykola, Serhiy, Volodymyr, Yuriy, Vasyl, Oleh, Ihor, Roman, Maksym, Artem, Denys, Pavlo, Vitaliy, Ruslan, Yaroslav]
+    female: [Olena, Iryna, Kateryna, Oksana, Nataliia, Yuliia, Tetiana, Svitlana, Anastasiia, Viktoriia, Mariia, Khrystyna, Halyna, Lesia, Daryna, Sofiia, Liliia, Inna, Larysa, Nadiia]
+    last: [Kovalenko, Shevchenko, Bondarenko, Tkachenko, Melnyk, Kravchenko, Oliynyk, Lysenko, Moroz, Savchenko, Boyko, Kovalchuk, Petrenko, Marchenko, Rudenko, Kuzmenko, Pavlenko, Hnatyuk, Ivanenko, Klymenko, Polishchuk, Zinchenko]
+  in:
+    male: [Arjun, Rahul, Vikram, Rohan, Aditya, Karan, Sanjay, Amit, Ravi, Nikhil, Suresh, Deepak, Manish, Anil, Vivek, Siddharth, Harish, Pranav, Varun, Kunal]
+    female: [Priya, Anjali, Neha, Pooja, Divya, Kavya, Sneha, Ananya, Meera, Isha, Shreya, Aditi, Riya, Nisha, Swati, Lakshmi, Deepika, Pallavi, Tanvi, Aparna]
+    last: [Sharma, Patel, Singh, Kumar, Gupta, Reddy, Iyer, Nair, Mehta, Joshi, Rao, Verma, Chopra, Malhotra, Bose, Das, Pillai, Menon, Kapoor, Agarwal, Banerjee, Desai]
+  asia:
+    male: [Wei, Chen, Minh, Hao, Jun, Tuan, Kenji, Duc, Long, Quang, Hiroshi, Takumi, Jian, Bao, Hung, Min]
+    female: [Mei, Linh, Xin, Hoa, Yuki, Lan, Thu, Jing, Ying, Ngoc, Sakura, Haruka, Xiu, Trang, Yan, Mai]
+    last: [Wang, Li, Zhang, Nguyen, Tran, Le, Pham, Liu, Huang, Tanaka, Wu, Zhao, Sun, Hoang, Vu, Dang, Sato, Suzuki, Yamamoto, Chen, Lin, Ho]
+  af:
+    male: [Kofi, Kwame, Mamadou, Ibrahima, Moussa, Emmanuel, Chidi, Oumar, Abdoulaye, Seydou, Yaw, Kojo, Babajide, Olumide, Samuel, Amadou]
+    female: [Ama, Aisha, Fatou, Aminata, Grace, Adjoa, Mariama, Ngozi, Awa, Kadiatou, Abena, Efua, Chiamaka, Folake, Bintou, Rokia]
+    last: [Mensah, Diallo, Traoré, Ndiaye, Okafor, Asante, Koné, Camara, Diop, Owusu, Sow, Ba, Keita, Coulibaly, Adeyemi, Boateng, Sarr, Touré, Kouassi, Mbeki, Okonkwo, Fofana]
+  ro:
+    male: [Ionuț, Florin, Andrei, Mihai, Cristian, Bogdan, Adrian, Marius]
+    female: [Ioana, Andreea, Bianca, Elena, Alexandra, Roxana, Diana, Irina]
+    last: [Popescu, Ionescu, Stoica, Dumitrescu, Munteanu, Constantin, Stan, Gheorghe, Dinu, Marin]
+  br:
+    male: [Lucas, Rafael, Gabriel, Diego, Thiago, Mateus, Felipe, Bruno, Pedro, Gustavo, Leonardo, Vinícius, Rodrigo, Caio, Henrique, André]
+    female: [Camila, Gabriela, Juliana, Beatriz, Larissa, Fernanda, Letícia, Mariana, Aline, Bruna, Carolina, Natália, Patrícia, Renata, Tatiane, Vanessa]
+    last: [Silva, Santos, Oliveira, Souza, Lima, Pereira, Costa, Ribeiro, Alves, Carvalho, Rodrigues, Ferreira, Gomes, Martins, Araújo, Barbosa, Rocha, Dias, Nascimento, Moreira, Cardoso, Teixeira]

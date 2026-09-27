@@ -1,0 +1,6 @@
+/lumo
+*.log
+.idea/
+.vscode/
+.DS_Store
+CLAUDE.local.md
