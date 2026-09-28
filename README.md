@@ -65,14 +65,19 @@ database `lumo`). Business data is in the `shop` schema; start with
 
 The default full run (730 days, 5k → 13k orders/day) needs about **17–20 GB of
 disk** and **~3 GB of RAM** for the simulator. For a quick try, lower
-`history_days` (e.g. to 14) and `initial_products` (e.g. to 3000) in
-[`config.yaml`](config.yaml) before the first start; the file is mounted into
-the container.
+`history_days` (e.g. to 14) and `initial_products` (e.g. to 3000) before the
+first start.
+
+Settings are layered: [`config.yaml`](config.yaml) holds the committed
+defaults, and an optional git-ignored `config.local.yaml` next to it overrides
+only the keys it contains. Copy
+[`config.local.example.yaml`](config.local.example.yaml) to get started. Both
+files are mounted into the container. Every key can also be overridden with a
+`LUMO_<NAME>` environment variable, e.g. `LUMO_HISTORY_DAYS=14`, which wins
+over both files.
 
 Other useful settings: `dirt_level: 0` for clean data, `seed` for a different
-but reproducible world. When running the binary directly
-(`go run ./cmd/lumo run`), every key can also be overridden with a
-`LUMO_<NAME>` environment variable, e.g. `LUMO_HISTORY_DAYS=14`.
+but reproducible world.
 
 ## What's inside
 

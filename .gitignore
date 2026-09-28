@@ -4,3 +4,4 @@
 .vscode/
 .DS_Store
 CLAUDE.local.md
+config.local.yaml

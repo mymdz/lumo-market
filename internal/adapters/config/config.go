@@ -4,6 +4,7 @@ package config
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"reflect"
 	"strconv"
 	"strings"
@@ -49,17 +50,16 @@ func Default() Config {
 	}
 }
 
-// Load reads the YAML file (optional) and applies LUMO_* env overrides.
+// Load reads the YAML file (optional), then its local sibling
+// (config.yaml -> config.local.yaml, optional, not committed) on top of it,
+// and finally applies LUMO_* env overrides. The local file only needs the keys
+// that differ, so shared defaults keep flowing in from the committed file.
 func Load(path string) (Config, error) {
 	cfg := Default()
 	if path != "" {
-		b, err := os.ReadFile(path)
-		if err != nil && !os.IsNotExist(err) {
-			return cfg, err
-		}
-		if err == nil {
-			if err := yaml.Unmarshal(b, &cfg); err != nil {
-				return cfg, fmt.Errorf("%s: %w", path, err)
+		for _, p := range []string{path, LocalPath(path)} {
+			if err := mergeFile(&cfg, p); err != nil {
+				return cfg, err
 			}
 		}
 	}
@@ -111,4 +111,27 @@ func Load(path string) (Config, error) {
 		}
 	}
 	return cfg, nil
+}
+
+// LocalPath returns the machine-local override file for a config path:
+// config.yaml -> config.local.yaml.
+func LocalPath(path string) string {
+	ext := filepath.Ext(path)
+	return strings.TrimSuffix(path, ext) + ".local" + ext
+}
+
+// mergeFile overlays the keys present in a YAML file onto cfg; a missing file
+// is not an error.
+func mergeFile(cfg *Config, path string) error {
+	b, err := os.ReadFile(path)
+	if os.IsNotExist(err) {
+		return nil
+	}
+	if err != nil {
+		return err
+	}
+	if err := yaml.Unmarshal(b, cfg); err != nil {
+		return fmt.Errorf("%s: %w", path, err)
+	}
+	return nil
 }

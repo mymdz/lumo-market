@@ -20,10 +20,11 @@ curl localhost:8088/status
 ```
 
 Compose publishes non-default host ports 5433/8088 to avoid clashing with a local
-Postgres or other services (`LUMO_PG_PORT`, `LUMO_API_PORT`). Every
-config key can be overridden with `LUMO_<NAME>` when running the binary
-directly (see `internal/adapters/config`); the compose container only reads the
-mounted `config.yaml`.
+Postgres or other services (`LUMO_PG_PORT`, `LUMO_API_PORT`). Config layers
+(see `internal/adapters/config`): defaults → `config.yaml` (committed) →
+`config.local.yaml` (git-ignored, partial overrides; example in
+`config.local.example.yaml`) → `LUMO_<NAME>` env. Compose mounts the project
+dir read-only at `/etc/lumo`, so the same layering applies in the container.
 
 Quick experiments: `LUMO_HISTORY_DAYS=14 LUMO_INITIAL_PRODUCTS=3000`.
 A full 730-day backfill takes ~12 min and ~17-20 GB; the process peaks ~2.6 GB RAM.

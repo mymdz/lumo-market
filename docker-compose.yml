@@ -44,7 +44,9 @@ services:
       LUMO_DATABASE_URL: postgres://lumo:lumo@postgres:5432/lumo?sslmode=disable
       GOMEMLIMIT: 3GiB   # makes the Go GC work harder before the container runs out of memory
     volumes:
-      - ./config.yaml:/app/config.yaml:ro
+      # The whole directory, not single files: config.local.yaml is optional and
+      # a bind mount of a missing file would fail.
+      - ./:/etc/lumo:ro
     ports:
       - "${LUMO_API_PORT:-8088}:8080"
     restart: unless-stopped

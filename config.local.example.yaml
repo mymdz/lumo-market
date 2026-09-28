@@ -1,0 +1,13 @@
+# Machine-local overrides. Copy to config.local.yaml (git-ignored) and keep
+# only the keys you want to change; everything else comes from config.yaml.
+# Precedence: config.yaml < config.local.yaml < LUMO_<NAME> env vars.
+
+# About half the default volume (~10 GB instead of ~20 GB after a full backfill):
+# orders_per_day_start: 2500
+# orders_per_day_now: 6500
+# initial_products: 10000
+# initial_sellers: 125
+
+# Quick experiment:
+# history_days: 14
+# initial_products: 3000

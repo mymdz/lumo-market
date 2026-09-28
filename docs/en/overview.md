@@ -42,9 +42,14 @@ about 17–20 GB; the simulator keeps the world in memory and peaks at about
 2.6 GB RAM. Less history means proportionally less of both.
 
 Ports can be changed with `LUMO_PG_PORT` (default 5433) and
-`LUMO_API_PORT` (default 8088). In Docker the simulator reads the mounted
-`config.yaml`; when running the binary directly, every key can also be overridden
-with a `LUMO_<NAME>` environment variable, e.g. `LUMO_DIRT_LEVEL=0`.
+`LUMO_API_PORT` (default 8088).
+
+Settings are read in layers, each overriding the previous one: built-in
+defaults → `config.yaml` (committed) → `config.local.yaml` next to it (optional,
+git-ignored, only the keys you want to change; see `config.local.example.yaml`)
+→ `LUMO_<NAME>` environment variables, e.g. `LUMO_DIRT_LEVEL=0`. The same
+applies in Docker (the project directory is mounted read-only into the
+container) and when running the binary directly.
 
 ## Time, downtime and dates
 

@@ -9,5 +9,5 @@ FROM gcr.io/distroless/static-debian12
 WORKDIR /app
 COPY --from=build /out/lumo /app/lumo
 EXPOSE 8080
-ENTRYPOINT ["/app/lumo", "-config", "/app/config.yaml"]
+ENTRYPOINT ["/app/lumo", "-config", "/etc/lumo/config.yaml"]
 CMD ["run"]
